@@ -19,5 +19,5 @@ RESTAURANT PERSPECTIVE
 login - GET /restaurants/:id
 browse orders - GET /restaurants/:id/orders
 browse order details - GET /restaurants/:id/orders/:id
-accept/reject orders - POST /restaurant/:id/orders/:id
+accept/reject/mark as pickedup orders - POST /restaurant/:id/orders/:id
 
