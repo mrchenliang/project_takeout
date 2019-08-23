@@ -8,5 +8,5 @@ CREATE TABLE menu_items (
   price INTEGER NOT NULL,
   description TEXT,
   image_url VARCHAR(255) NOT NULL,
-  active BOOLEAN DEFAUL true
+  active BOOLEAN DEFAULT true
 );
