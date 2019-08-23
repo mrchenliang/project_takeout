@@ -1,0 +1,21 @@
+USER PERSPECTIVE
+/ redirects to GET /restaurants/
+
+register - POST /users/
+login - GET /users/:id
+user orders - GET /users/:id/orders
+add user order - POST /users/:id/orders
+user order information - GET /users/:id/orders/:id
+add item to user order - POST /users/:id/orders/:id
+edit item in user order - PUT /users/:id/orders/:id
+delete item from user order - DELETE /users/:id/orders/:id
+
+browse restaurant page - GET /restaurants/
+browse restaurant menu - GET /restaurants/:id
+
+RESTAURANT PERSPECTIVE
+/ redirects to GET /restaurants/:id/orders
+
+login - GET /restaurants/:id
+browse orders - GET /restaurants/:id/orders
+browse order details - GET /restaurants/:id/orders/:i
