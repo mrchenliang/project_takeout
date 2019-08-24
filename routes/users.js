@@ -22,9 +22,20 @@ module.exports = (db) => {
       });
   });
 
-  //login route
+  //login page
   router.get("/login", (req, res) => {
     res.render("login");
   });
+
+  //browse user's orders
+  router.get("/:user_id/orders", (req, res) => {
+
+  });
+
+  //browse user's specfic order
+  router.get("/:user_id/orders/:order_id", (req, res) => {
+
+  });
+
   return router;
 };
