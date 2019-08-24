@@ -1,0 +1,30 @@
+#landingHeader {
+  height: 80vh;
+  width: 100%;
+  background-image: url("https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80 ");
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+#landingInstructions {
+  height: 60vh;
+  width: 100%;
+  background: #1b1c1d;
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  padding: 60px 0px;
+}
+
+#landingRestaurants {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 60px 0px;
+}
+
+#order-now {
+
+}

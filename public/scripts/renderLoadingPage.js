@@ -3,11 +3,11 @@ const renderLoadingPage = function(data) {
 
   const newTemplateString = `
   <div id='landingHeader'>
-    <h2>AWESOME LANDING PAGE</h2>
+    <h2>ORDERING MADE EASY</h2>
   </div>
   <div id='landingInstructions'>
     <div class="ui card">
-      <div class="image" >
+      <div class="image">
         <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
       </div>
       <div class="content">
@@ -32,7 +32,7 @@ const renderLoadingPage = function(data) {
     </div>
   </div>
   <div id='landingRestaurants'>
-    <button>RESTAURANTS</button>
+    <button class="ui secondary button">RESTAURANTS</button>
   </div>
   `;
   $('#rootContainer').append(newTemplateString);
