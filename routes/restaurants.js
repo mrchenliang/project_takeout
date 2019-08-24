@@ -12,7 +12,9 @@ const DB = require('../lib/dbHelpers.js');
 module.exports = (db) => {
   //browse restaurants
   router.get("/", (req, res) => {
-    DB.getAllRestaurants().then(result => res.render('index', {data: result}));
+    DB.getAllRestaurants().then(result => {
+      res.send(result);
+    });
   });
 
   //browse restaurant menu route
