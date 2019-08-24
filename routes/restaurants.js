@@ -12,7 +12,13 @@ const helpers = require('../lib/dbHelpers.js');
 module.exports = (db) => {
   //browse restaurants
   router.get("/", (req, res) => {
+<<<<<<< HEAD
     helpers.getAllRestaurants(db).then(result => res.send(result));
+=======
+    DB.getAllRestaurants().then(result => {
+      res.send(result);
+    });
+>>>>>>> e72c74a898702cce69d75acd600f5817c1969885
   });
 
   //browse restaurant menu route
