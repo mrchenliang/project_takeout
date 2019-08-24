@@ -7,28 +7,16 @@
 
 const express = require('express');
 const router  = express.Router();
+const DB = require('../lib/dbHelpers.js');
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM restaurants;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
   //browse restaurants
-  router.get("/restaurants", (req, res) => {
-
+  router.get("/", (req, res) => {
+    DB.getAllRestaurants().then(result => res.send({data: result}));
   });
 
   //browse restaurant menu route
-  router.get("/restaurants/:restaurant_id", (req, res) => {
+  router.get("/:restaurant_id", (req, res) => {
 
   });
 
