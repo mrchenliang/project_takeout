@@ -26,5 +26,34 @@ module.exports = (db) => {
   router.get("/login", (req, res) => {
     res.render("login");
   });
+
+  //browse restaurants route
+  router.get("/restaurants", (req, res) => {
+    db.query(`SELECT * FROM restaurants;`)
+      .then(data => {
+        const users = data.rows;
+        res.json({ users });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  //browse restaurant menu route
+  router.get("/restaurants/:id", (req, res) => {
+    db.query(`SELECT * FROM restaurants;`)
+      .then(data => {
+        const users = data.rows;
+        res.json({ users });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   return router;
 };
