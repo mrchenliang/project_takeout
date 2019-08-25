@@ -6,9 +6,8 @@ const renderLoadingPage = function(data) {
     <h2 id='landing-text'>ORDERING MADE EASY</h2>
   </div>
   <div id='landingInstructions'>
-  <div class="ui three column grid">
-  <div class="column">
-    <div class="ui fluid card">
+  <div class="instruction column">
+    <div class="ui card">
       <div class="image">
         <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
       </div>
@@ -17,8 +16,8 @@ const renderLoadingPage = function(data) {
       </div>
     </div>
   </div>
-  <div class="column">
-    <div class="ui fluid card">
+  <div class="instruction column">
+    <div class="ui card">
       <div class="image">
         <img src="https://images.unsplash.com/photo-1475818413317-9367409f204a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80">
       </div>
@@ -27,8 +26,8 @@ const renderLoadingPage = function(data) {
       </div>
     </div>
   </div>
-  <div class="column">
-    <div class="ui fluid card">
+  <div class="instruction column">
+    <div class="ui card">
       <div class="image">
         <img src="https://images.unsplash.com/photo-1559144490-8328294facd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80">
       </div>
@@ -36,7 +35,6 @@ const renderLoadingPage = function(data) {
         <a class="header">Step 3: Pickup & Enjoy</a>
       </div>
     </div>
-  </div>
 </div>
 </div>
 
