@@ -1,0 +1,67 @@
+.restaurant-card {
+  clip-path: polygon(0 0, 46% 0, 68% 100%, 0% 100%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-position: left;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: -50px;
+  border-radius: 10px;
+}
+
+.restaurant-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: none;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.restaurant-card-wrap {
+  width: 85%;
+  height: 12.5em;
+  margin: 2em auto;
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 19px 15px 23px -11px rgba(0,0,0,0.75);
+}
+
+.restaurant-placeholder > h1 {
+  position: absolute;
+  bottom: 0;
+  left: 1em;
+  color: white;
+  text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+.restaurant-placeholder > .restaurant-description {
+  float: right;
+  width: 40%;
+  display: inline;
+  text-align: right;
+  color: black;
+  padding-right: 2em;
+  padding-top: 1.25em;
+}
+
+.restaurant-description > p {
+  margin: 0;
+  font-size: 12px;
+  color: grey;
+}
+
+
+
+
