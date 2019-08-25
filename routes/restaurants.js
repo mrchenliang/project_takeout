@@ -7,19 +7,17 @@
 
 const express = require('express');
 const router  = express.Router();
-const DB = require('../lib/dbHelpers.js');
+const helpers = require('../lib/dbHelpers.js');
 
 module.exports = (db) => {
   //browse restaurants
   router.get("/", (req, res) => {
-    DB.getAllRestaurants().then(result => {
-      res.send(result);
-    });
+    helpers.getAllRestaurants(db).then(result => res.send(result));
   });
 
   //browse restaurant menu route
   router.get("/:restaurant_id", (req, res) => {
-    DB.getMenuItems(req.params.restaurant_id).then(result => res.render('index', {data: result}));
+    helpers.getMenuItems(db, req.params.restaurant_id).then(result => res.send(result));
   });
 
   return router;
