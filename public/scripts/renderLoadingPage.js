@@ -32,7 +32,7 @@ const renderLoadingPage = function(data) {
     </div>
   </div>
   <div id='landingRestaurants'>
-    <button>RESTAURANTS</button>
+    <button class='restaurants-link'>RESTAURANTS</button>
   </div>
   `;
   $('#rootContainer').append(newTemplateString);
