@@ -1,42 +1,48 @@
 const renderLoadingPage = function(data) {
-  $('#rootContainer').empty();
+  $("#rootContainer").empty();
 
   const newTemplateString = `
   <div id='landingHeader'>
-    <h2>ORDERING MADE EASY</h2>
+    <h2 id='landing-text'>ORDERING MADE EASY</h2>
   </div>
   <div id='landingInstructions'>
-    <div class="ui card">
+  <div class="ui three column grid">
+  <div class="column">
+    <div class="ui fluid card">
       <div class="image">
         <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
       </div>
       <div class="content">
-        <p class="header">STEP 1</p>
-      </div>
-    </div>
-    <div class="ui card">
-      <div class="image" >
-        <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-      </div>
-      <div class="content">
-        <p class="header">STEP 2</p>
-      </div>
-    </div>
-    <div class="ui card">
-      <div class="image" >
-        <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-      </div>
-      <div class="content">
-        <p class="header">STEP 3</p>
+        <a class="header">Step 1: Browse & Order</a>
       </div>
     </div>
   </div>
+  <div class="column">
+    <div class="ui fluid card">
+      <div class="image">
+        <img src="https://images.unsplash.com/photo-1475818413317-9367409f204a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80">
+      </div>
+      <div class="content">
+        <a class="header">Step 2: Confirm & Wait</a>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui fluid card">
+      <div class="image">
+        <img src="https://images.unsplash.com/photo-1559144490-8328294facd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80">
+      </div>
+      <div class="content">
+        <a class="header">Step 3: Pickup & Enjoy</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
   <div id='landingRestaurants'>
     <button class="ui secondary button">RESTAURANTS</button>
   </div>
   `;
-  $('#rootContainer').append(newTemplateString);
-
+  $("#rootContainer").append(newTemplateString);
 };
-
-
