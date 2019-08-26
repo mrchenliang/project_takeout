@@ -4,6 +4,7 @@ const renderMenuItems = function(data) {
   const generateCategories = (categories) => {
     const categoryArray = [];
     let categoryTemplateString = '';
+    let categoryList = '';
 
     categories.forEach(element => {
       if (!categoryArray.includes(element.category_name)) {
@@ -13,9 +14,29 @@ const renderMenuItems = function(data) {
         <h1>${element.category_name}</h1>
         </div>
         `;
+        categoryList += `
+        <h2>${element.category_name}</h2>
+        `;
       }
     });
+
     $('.menuItems').append(categoryTemplateString);
+    $('.menuItemsCategories').append(categoryList);
+
+    let baseElement = document.querySelector('.menuItemsCategories');
+
+    const h2s = baseElement.querySelectorAll('h2');
+
+    h2s.forEach(function(element)  {
+      element.addEventListener('click', () => {
+        const slct = element.textContent;
+        $('html, body').animate({
+          scrollTop: ($('div[data-category="' + slct + '"').first().offset().top)
+        },500);
+      });
+    });
+
+
   };
 
   const generateMenuItems = (menuItems) => {
@@ -40,16 +61,20 @@ const renderMenuItems = function(data) {
   };
 
   const newTemplateString = `
-  <div class='ui grid'>
-    <div class='leftSideBar four wide column'>
-      <div class='restImage' style='background-image: url("${data.restaurant_image_url}")'>
+  <div>
+    <div class='leftSideBar'>
+      <div class='restImage' style='background-image: url("${data[0].restaurant_image_url}")'>
       </div>
       <div class='restInfo'>
+        <p>${data[0].restaurant_name}</p>
+        <p>${data[0].restaurant_phone}</p>
+        <p>${data[0].restaurant_website}</p>
+        <p>${data[0].restaurant_address}</p>
       </div>
     </div>
-    <div class='menuItems eight wide column'>
+    <div class='menuItems'>
     </div>
-    <div class='rightSideBar four wide column'>
+    <div id='rightSideBar'>
       <div class='menuItemsCategories'>
       </div>
     </div>
@@ -58,5 +83,4 @@ const renderMenuItems = function(data) {
   $("#rootContainer").append(newTemplateString);
   generateCategories(data);
   generateMenuItems(data);
-
 };
