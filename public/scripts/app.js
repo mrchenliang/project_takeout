@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 // ON CLICK LISTENER AND RENDER ORDERS PAGE
   $('.orders-list').on('click', () => {
-    $.ajax('/clients/:client_id/orders', { method: 'GET' })
+    $.ajax('/clients/2/orders', { method: 'GET' })
       .done(function(value) {
       renderClientsOrdersPage(value);
       });
