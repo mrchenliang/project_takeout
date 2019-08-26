@@ -20,5 +20,10 @@ module.exports = (db) => {
     helpers.getMenuItems(db, req.params.restaurant_id).then(result => res.send(result));
   });
 
+  //browse restaurant menu route
+  router.get("/categories/:category_id", (req, res) => {
+    helpers.getCategoryNameById(db, req.params.category_id).then(result => res.send(result));
+  });
+
   return router;
 };
