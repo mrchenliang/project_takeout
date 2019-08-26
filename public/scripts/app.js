@@ -22,14 +22,6 @@ $(document).ready(function() {
     $('#registerModal').modal('show');
   });
 
-  // $(document).on('submit', '#mainLoginForm', function() {
-  //   let values = {};
-  //   $.each($('#mainLoginFrom').serializeArray(), function(i, field) {
-  //     values[field.name] = field.value;
-  // });
-  //   return false;
-  //  });
-
   $("#mainLoginForm").submit(function() {
     event.preventDefault();
     const formArray = $('#mainLoginForm').serializeArray();
@@ -45,6 +37,7 @@ $(document).ready(function() {
         $('#login').css('display', 'none');
         $('#signup').css('display', 'none');
         $('#logout').css('display', 'inline-block');
+        $('#order-progress').text("You're logged in as:  " + value.name);
       }
     })
   });
@@ -53,6 +46,7 @@ $(document).ready(function() {
     $('#login').css('display', 'inline-block');
     $('#signup').css('display', 'inline-block');
     $('#logout').css('display', 'none');
+    $('#order-progress').text('');
     document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
   });
 
@@ -69,7 +63,16 @@ $(document).ready(function() {
     $('#login').css('display', 'none');
     $('#signup').css('display', 'none');
     $('#logout').css('display', 'inline-block');
+    $('#order-progress').text("You're logged in as:  " + formArray[0].value);
     document.cookie = 'userId=' + value.id;
+    $('#registerModal').modal('hide');
+  });
+
+  $('.exitL').on('click', () => {
+    $('#loginModal').modal('hide');
+  });
+
+  $('.exitR').on('click', () => {
     $('#registerModal').modal('hide');
   });
 

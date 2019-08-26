@@ -1,5 +1,4 @@
 #loginModal {
-  padding-top: 30%;
   text-align: center;
 }
 
@@ -15,3 +14,22 @@
 #mainRegisterForm {
   text-align: center;
 }
+
+#mainLoginForm > * {
+  display: block;
+  margin: 0 auto 1em auto;
+}
+
+.exitR, .exitL {
+  border: 2px solid white;
+  padding: 10px;
+  width: 50px;
+}
+
+.exitR:hover, .exitL:hover {
+  border: 2px solid white;
+  background-color: white;
+  color: black;
+}
+
+

@@ -27,9 +27,10 @@
     <div class="ui basic modal" id='loginModal'>
         <h2 class='loginHeader'>Please Enter Your Login Information</h2>
         <form action="/users/login" method="POST" id="mainLoginForm">
-          <input type="text" name='email'>
-          <input type="password" name='password'>
+          <input type="text" name='email' placeholder='email'>
+          <input type="password" name='password' placeholder='password'>
           <button>Submit</button>
+          <span class='exitL'>EXIT</span>
         </form>
       </div>
 
@@ -41,6 +42,7 @@
             <input type="text" name='phone' placeholder='phone'>
             <input type="password" name='password' placeholder='password'>
             <button>Submit</button>
+            <span class='exitR'>EXIT</span>
           </form>
         </div>
     <% include partials/footer.ejs %>
