@@ -15,12 +15,6 @@ module.exports = db => {
   //login page
   router.get("/login", (req, res) => {});
 
-  //browse user's orders
-  router.get("/:user_id/orders", (req, res) => {});
-
-  //browse user's specfic order
-  router.get("/:user_id/orders/:order_id", (req, res) => {});
-
   //login the user
   router.post("/login", (req, res) => {
     const email = req.body.email;
@@ -29,12 +23,26 @@ module.exports = db => {
     helpers
       .getUserByEmail(db, email)
       .then(result => {
-        const userDetails = result[0];
+        const userDetails = result;
         if (userDetails.password === password) {
           res.send("Logged In\n");
         } else {
           res.send("Incorrect credentials\n");
         }
+      })
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //returns the users pending order details
+  router.get("/:user_id/orders", (req, res) => {
+    const user_id = req.params.user_id;
+    helpers.getUsersPendingOrderDetails(db, user_id)
+      .then(result => {
+        res.send(result);
       })
       .catch(e =>
         setImmediate(() => {
@@ -50,12 +58,31 @@ module.exports = db => {
     const quantity = req.body.quantity;
     const notes = req.body.notes;
 
-    // helpers.getUsersPendingOrder(db, user_id).then(result => console.log(result[0].id));
-    // helpers.getMenuItemPrice(db, menu_item_id).then(result => console.log(result[0].price));
-
-    helpers.addToOrder(db, user_id, menu_item_id, quantity, notes)
+    helpers
+      .addToOrder(db, user_id, menu_item_id, quantity, notes)
       .then(result => {
-        console.log(result);
+        // console.log(result);
+        res.send(result);
+      })
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //edit an item in the users order
+  router.put("/:user_id/orders", (req, res) => {
+    const user_id = req.params.user_id;
+    const menu_item_id = req.body.menu_item_id;
+    const quantity = req.body.quantity;
+    const notes = req.body.notes;
+
+    helpers
+      .editOrderItem(db, user_id, menu_item_id, quantity, notes)
+      .then(result => {
+        // console.log(result);
+        res.send(result);
       })
       .catch(e =>
         setImmediate(() => {
