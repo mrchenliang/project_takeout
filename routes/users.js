@@ -91,5 +91,22 @@ module.exports = db => {
       );
   });
 
+
+//delete an item to the users order
+router.delete("/:user_id/orders", (req, res) => {
+    const user_id = req.params.user_id;
+    const menu_item_id = req.body.menu_item_id;
+
+    helpers.deleteToOrder(db, user_id, menu_item_id)
+      .then(result => {
+        res.send(result);
+      })
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
   return router;
 };
