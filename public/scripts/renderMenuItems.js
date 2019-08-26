@@ -83,4 +83,5 @@ const renderMenuItems = function(data) {
   $("#rootContainer").append(newTemplateString);
   generateCategories(data);
   generateMenuItems(data);
+
 };
