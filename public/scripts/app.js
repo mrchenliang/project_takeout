@@ -23,7 +23,11 @@ $(document).ready(function() {
       .done(function(value) {
         renderRestaurantsPage(value);
       });
-  })
+  });
+
+
+
+
 
 
 

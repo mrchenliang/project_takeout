@@ -6,13 +6,15 @@ const renderRestaurantsPage = function(data) {
   data.forEach((element) => {
 
     const newRestaurant = `
-    <div class='restaurant-card-wrap'>
-      <div class='restaurant-card' data-restaurant-id='${element.id}' style='background-image: url("${element.cover_photo_url}")'>
+    <div class='restaurant-card-wrap' data-restaurantId='${element.id}'>
+      <div class='restaurant-card' style='background-image: url("${element.cover_photo_url}")'>
       </div>
       <div class='restaurant-placeholder'>
         <h1>${element.name}</h1>
         <div class='restaurant-description'>
           ${element.description}
+          <br>
+          <br>
           <br>
           <br>
           <br>
@@ -27,5 +29,16 @@ const renderRestaurantsPage = function(data) {
   });
 
   $('#rootContainer').append(newTemplateString);
+
+  $('.restaurant-card-wrap').on('click', function() {
+    const restId = $(this).data().restaurantid;
+    const queryString = `/restaurants/${restId}`;
+
+
+    $.ajax(queryString, { method: 'GET' })
+      .done(function(value) {
+        renderMenuItems(value);
+      });
+  });
 
 };
