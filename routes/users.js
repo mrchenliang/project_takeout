@@ -29,9 +29,10 @@ module.exports = db => {
     helpers
       .getUserByEmail(db, email)
       .then(result => {
-        const userDetails = result[0];
+        const userDetails = result;
         if (userDetails.password === password) {
-          res.send("Logged In\n");
+          res.send(result);
+          // res.send("Logged In\n");
         } else {
           res.send("Incorrect credentials\n");
         }
@@ -50,12 +51,10 @@ module.exports = db => {
     const quantity = req.body.quantity;
     const notes = req.body.notes;
 
-    // helpers.getUsersPendingOrder(db, user_id).then(result => console.log(result[0].id));
-    // helpers.getMenuItemPrice(db, menu_item_id).then(result => console.log(result[0].price));
-
     helpers.addToOrder(db, user_id, menu_item_id, quantity, notes)
       .then(result => {
-        console.log(result);
+        // console.log(result);
+        res.send(result);
       })
       .catch(e =>
         setImmediate(() => {
