@@ -1,0 +1,36 @@
+.menuItemDescription {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+}
+
+.menuItemDescription > h3 {
+  position: absolute;
+  bottom:0;
+  left:0;
+}
+
+.menuItemImage {
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  float: right;
+}
+
+.menuItemsCategory {
+  margin: 2em 0;
+}
+
+.singleMenuItem {
+  height: 150px;
+  margin-bottom: 3em;
+}
+
+.leftSideBar {
+  position: fixed;
+}
+
+.restImage {
+  height: 65%;
+}
+
