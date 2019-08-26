@@ -40,7 +40,8 @@ module.exports = db => {
   //returns the users pending order details
   router.get("/:user_id/orders", (req, res) => {
     const user_id = req.params.user_id;
-    helpers.getUsersPendingOrderDetails(db, user_id)
+    helpers
+      .getUsersPendingOrderDetails(db, user_id)
       .then(result => {
         res.send(result);
       })
@@ -91,13 +92,28 @@ module.exports = db => {
       );
   });
 
-
-//delete an item to the users order
-router.delete("/:user_id/orders", (req, res) => {
+  //delete an item from the users order
+  router.delete("/:user_id/orders", (req, res) => {
     const user_id = req.params.user_id;
     const menu_item_id = req.body.menu_item_id;
 
-    helpers.deleteToOrder(db, user_id, menu_item_id)
+    helpers
+      .deleteFromOrder(db, user_id, menu_item_id)
+      .then(result => {
+        res.send(result);
+      })
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //submit the users order (mark as submitted)
+  router.post("/:user_id/orders/submit", (req, res) => {
+    const user_id = req.params.user_id;
+
+    helpers.submitOrder(db, user_id)
       .then(result => {
         res.send(result);
       })
