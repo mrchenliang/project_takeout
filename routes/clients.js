@@ -9,20 +9,20 @@ const express = require('express');
 const router  = express.Router();
 const helpers = require('../lib/dbHelpers.js');
 
-odule.exports = (db) => {
-  //browse restaurants
-  router.get("/", (req, res) => {
-    helpers.getAllRestaurants(db).then(result => res.send(result));
+module.exports = (db) => {
+  //get all orders from a specific restaurant
+  router.get("/clients/:client_id/orders", (req, res) => {
+    helpers.getAllOrders(db, req.params.restaurant_id).then(result => res.send(result));
   });
 
-  //browse restaurant menu route
-  router.get("/:restaurant_id", (req, res) => {
-    helpers.getMenuItems(db, req.params.restaurant_id).then(result => res.send(result));
+  //get order details from specific restaurant and specific order
+  router.get("/clients/:client_id/orders/:order_id", (req, res) => {
+    helpers.getOrderByID(db, req.params.orders.id).then(result => res.send(result));
   });
 
-  //browse restaurant menu route
-  router.get("/categories/:category_id", (req, res) => {
-    helpers.getCategoryNameById(db, req.params.category_id).then(result => res.send(result));
+  //get order details from specific restaurant and specific order
+  router.post("/clients/:client_id/orders/:order_id", (req, res) => {
+    helpers.markOrderConfirmed(db, req.params.orders.id).then(result => res.send(result));
   });
 
   return router;
