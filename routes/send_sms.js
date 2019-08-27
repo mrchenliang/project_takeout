@@ -1,7 +1,7 @@
 //This file is used to send a message to users about their orders
 
-const accountSid = 'AC9e93205a99a6539689388b48f5f2d61c';
-const authToken = '0d3dfcad366973c43614361a219f01a2';
+const accountSid = process.env.accountSid;
+const authToken = process.env.authToken;
 const client = require('twilio')(accountSid, authToken);
 
 const sendMessage = function(message, number) {
