@@ -60,10 +60,6 @@ const renderMenuItems = function(data) {
 
   };
 
-  const generateOrderCartPopup = () {
-
-  }
-
   const newTemplateString = `
   <div>
     <div class='leftSideBar'>
@@ -87,7 +83,6 @@ const renderMenuItems = function(data) {
   $("#rootContainer").append(newTemplateString);
   generateCategories(data);
   generateMenuItems(data);
-  generateOrderCartPopup();
 
 
   // ON CLICK LISTENER AND RENDER ADD TO CART MODAL
@@ -99,7 +94,7 @@ const renderMenuItems = function(data) {
     let quantity = 1;
 
     const modal =
-      `<div class="ui modal">
+      `<div class="ui modal" id="orderModal">
         <div class="header">
           <h1>Add to Order</h1>
         </div>
@@ -162,6 +157,6 @@ const renderMenuItems = function(data) {
       };
     });
 
-    $('.ui.modal').modal('show');
+    $('#orderModal').modal('show');
   });
 };
