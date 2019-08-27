@@ -77,7 +77,7 @@ const renderMenuItems = function(data) {
               $.ajax({
                 method : 'DELETE',
                 url: '/users/' + splitCookie[1][0] + '/orders',
-                data: `menu_item_id=${value.menu_item_id}&notes=${notes}`
+                data: `menu_item_id=${element.menu_item_id}&notes=${notes}`
               }).done((result) => {
                 generateCartPopupDetails();
               })
