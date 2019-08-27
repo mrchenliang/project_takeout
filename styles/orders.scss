@@ -1,0 +1,30 @@
+.ui.status-completed {
+  background-color: grey;
+}
+
+.ui.status-submitted {
+  background-color: red;
+}
+
+.ui.status-confirmed {
+  background-color: green;
+}
+
+#order-card {
+  height: 25vh;
+  margin-left: 5vh;
+}
+
+.maincontainer {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+#clientsLeftContainer {
+  left: 10%;
+}
+
+.background-color {
+background-color:  #f0e9f5;
+}
