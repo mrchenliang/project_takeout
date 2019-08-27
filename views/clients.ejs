@@ -15,15 +15,19 @@
     <!--ALL SCRIPTS-->
     <script type="text/javascript" src="/scripts/renderClientsLandingPage.js"></script>
     <script type="text/javascript" src="/scripts/renderClientsOrdersPage.js"></script>
+    <script type="text/javascript" src="/scripts/renderOrdersDetail.js"></script>
   </head>
 
 
   <body>
     <% include partials/sidebar.ejs %>
-    <div class ='container'>
+    <div class = 'background-color'>
+    <div id = 'clients-landing'></div>
+    <div class='maincontainer' id ='maincontainer'>
     <div id='clientsLeftContainer'></div>
     <div id='clientsRightContainer'></div>
     </div>
+  </div>
     <% include partials/footer.ejs %>
   </body>
 </html>
