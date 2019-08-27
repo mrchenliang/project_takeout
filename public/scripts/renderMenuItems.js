@@ -30,7 +30,8 @@ const renderMenuItems = function(data) {
       url: '/users/' + userId + '/orders',
     }).done(function(value) {
       console.log(value);
-  }
+    });
+  };
 
   const generateCategories = (categories) => {
     const categoryArray = [];
