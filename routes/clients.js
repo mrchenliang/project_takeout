@@ -12,12 +12,24 @@ const helpers = require('../lib/dbHelpers.js');
 module.exports = (db) => {
   //get all orders from a specific restaurant
   router.get("/:client_id/orders", (req, res) => {
-    helpers.getAllOrders(db, req.params.client_id).then(result => res.send(result));
+    helpers.getAllOrders(db, req.params.client_id)
+      .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
   });
 
   //get order details from specific restaurant and specific order
   router.get("/:client_id/orders/:order_id", (req, res) => {
-    helpers.getOrderDetailsById(db, req.params.order_id).then(result => res.send(result));
+    helpers.getOrderDetailsById(db, req.params.client_id, req.params.order_id)
+      .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
   });
 
   //post order details from specific restaurant and specific order
