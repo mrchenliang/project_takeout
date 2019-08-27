@@ -69,7 +69,7 @@ const renderMenuItems = function(data) {
           $('.cartTotals').empty();
           const tempStringTotals = `
           <div class='cartTotalsSum'>
-            <h2>Your total : $${(total) / 100}</h2>
+            <h2>Your total : $${((total) / 100).toFixed(2)}</h2>
           </p>
           `;
           const tempStringButton = `
@@ -194,6 +194,11 @@ const renderMenuItems = function(data) {
     // let image = $(this).children('.menuItemImage').css("background-image");
     let quantity = 1;
 
+    const allCookies = document.cookie;
+    const splitCookie = allCookies.split('=');
+
+    const userId = splitCookie[1][0];
+
     const orderModal =
       `<div class="ui modal" id="orderModal">
         <div class="header">
@@ -207,7 +212,7 @@ const renderMenuItems = function(data) {
           <p>${description}</p>
           <h3>$ ${price}</h3>
         </div>
-        <form class="ui form" id="addItemForm-${itemId}" action="/users/1/orders" method="POST">
+        <form class="ui form" id="addItemForm-${itemId}" action="/users/${userId}/orders" method="POST">
           <h4>Notes (optional):</h4>
           <input type="text" name="notes" placeholder="Make it blessed.">
           <div class="quantityInput field">
