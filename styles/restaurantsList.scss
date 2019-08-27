@@ -31,6 +31,15 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 19px 15px 23px -11px rgba(0,0,0,0.75);
+  transition: .75s;
+}
+
+.restaurant-card-wrap:hover {
+  box-shadow: 40px 40px 40px -11px rgba(0,0,0,0.75);
+  background-color: lightcyan;
+  transform: scale(1.11);
+
+
 }
 
 .restaurant-placeholder > h1 {
