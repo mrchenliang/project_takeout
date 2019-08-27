@@ -63,6 +63,22 @@ module.exports = db => {
       );
   });
 
+  // //returns the users order details by order id
+  // router.get("/:user_id/orders", (req, res) => {
+  //   const user_id = req.params.user_id;
+
+  //   helpers
+  //     .getUsersOrderByOrderId(db, user_id)
+  //     .then(result => {
+  //       res.send(result);
+  //     })
+  //     .catch(e =>
+  //       setImmediate(() => {
+  //         throw e;
+  //       })
+  //     );
+  // });
+
   //add an item to the users order
   router.post("/:user_id/orders", (req, res) => {
     const user_id = req.params.user_id;
