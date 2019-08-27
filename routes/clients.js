@@ -43,9 +43,9 @@ module.exports = (db) => {
           .then(result => {
             const phone = result.phone;
             console.log(markOrderResult);
-            if (markOrderResult.status === "confirmed"){
+            if (markOrderResult.status === "confirmed") {
               sendMessage("Your order has been confirmed and is being prepared. Hold tight!", result.phone);
-            } else if (markOrderResult.status === "completed"){
+            } else if (markOrderResult.status === "completed") {
               sendMessage("Your order is ready for pick up. Enjoy!", result.phone);
             }
             //send sms message

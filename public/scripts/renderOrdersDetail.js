@@ -4,6 +4,8 @@ const renderOrdersDetail = function(data) {
 let info =
 `<h1>Customer: ${data[0].user_name}</h1>
 <h1>Order ID: ${data[0].order_id}</h1>`;
+let total =
+`<h1>Total: ${data[0].order_id}</h1>`;
 let newTemplateString = `
 <table class="ui celled padded table">
 <thead>
@@ -41,5 +43,7 @@ data.forEach(element => {
 
   $("#clientsRightContainer").append(info);
   $("#clientsRightContainer").append(newTemplateString);
+  $("#clientsRightContainer").append(total);
+
 
 };
