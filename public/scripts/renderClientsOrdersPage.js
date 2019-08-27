@@ -52,6 +52,6 @@ const renderClientsOrdersPage = function(data) {
     setTimeout($.ajax('/clients/2/orders', { method: 'GET' })
       .done(function(value) {
       renderClientsOrdersPage(value);
-      }), 5000);
+      }), 3000);
   });
 };
