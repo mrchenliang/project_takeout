@@ -7,6 +7,7 @@ const ENV        = process.env.ENV || "development";
 const express    = require("express");
 const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
+const cookieParser = require('cookie-parser');
 const app        = express();
 const morgan     = require('morgan');
 
@@ -30,6 +31,7 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.use(cookieParser());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own

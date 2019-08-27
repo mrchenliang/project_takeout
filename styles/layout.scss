@@ -13,3 +13,10 @@ body {
   background-color: #f0e9f5;
   position: relative;
 }
+
+.ui.modal:not(.compact) {
+  width: calc(100% - 50px) !important;
+  margin-left: 25px !important;
+  height: calc(100% - 50px) !important;
+  margin-top: 125px !important;
+}

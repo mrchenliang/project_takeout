@@ -24,10 +24,12 @@ module.exports = db => {
       .getUserByEmail(db, email)
       .then(result => {
         const userDetails = result;
-        if (userDetails.password === password) {
-          res.send("Logged In\n");
+        if (result) {
+          if (userDetails.password === password) {
+            res.send(result);
+          }
         } else {
-          res.send("Incorrect credentials\n");
+          res.send({error: 'Error'});
         }
       })
       .catch(e =>
@@ -36,6 +38,15 @@ module.exports = db => {
         })
       );
   });
+
+  //registers the user
+  router.post('/', (req, res) => {
+    const { name, email, phone, password } = req.body;
+    console.log(name, email, phone, password);
+    helpers.registerUser(db, name, email, phone, password).then(result => {
+      res.send(result)
+    });
+  })
 
   //returns the users pending order details
   router.get("/:user_id/orders", (req, res) => {
