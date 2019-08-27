@@ -46,7 +46,9 @@ $(document).ready(function() {
       if (value.error == 'Error') {
         $('.loginHeader').text('Login failed. Please check your credentials.');
       } else {
+        console.log(value);
         document.cookie = 'userId=' + value.id;
+        document.cookie = 'userName=' + value.name;
         $('#loginModal').modal('hide');
         $('#login').css('display', 'none');
         $('#signup').css('display', 'none');
@@ -62,6 +64,8 @@ $(document).ready(function() {
     $('#logout').css('display', 'none');
     $('#order-progress').text('');
     document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'userName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    // document.cookie = 'userName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
   });
 
   $("#mainRegisterForm").submit(function() {
@@ -73,12 +77,14 @@ $(document).ready(function() {
       email: formArray[1].value,
       phone: formArray[2].value,
       password: formArray[3].value,
-    } });
+    } }).done((value) => {
+      document.cookie = 'userId=' + value.id;
+      document.cookie = 'userName=' + value.name;
+    });
     $('#login').css('display', 'none');
     $('#signup').css('display', 'none');
     $('#logout').css('display', 'inline-block');
     $('#order-progress').text("You're logged in as:  " + formArray[0].value);
-    document.cookie = 'userId=' + value.id;
     $('#registerModal').modal('hide');
   });
 
@@ -89,6 +95,10 @@ $(document).ready(function() {
   $('.exitR').on('click', () => {
     $('#registerModal').modal('hide');
   });
+
+
+
+
 
 
 

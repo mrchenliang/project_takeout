@@ -43,4 +43,14 @@ const renderLandingPage = function(data) {
   </div>
   `;
   $("#rootContainer").append(newTemplateString);
+
+  if (document.cookie.split('=')[2]) {
+    const allCookies = document.cookie;
+    const splitCookie = allCookies.split('=');
+    const userName = splitCookie[2];
+    $('#login').css('display', 'none');
+    $('#signup').css('display', 'none');
+    $('#logout').css('display', 'inline-block');
+    $('#order-progress').text("You're logged in as:  " + userName);
+  }
 };

@@ -39,29 +39,37 @@ const renderMenuItems = function(data) {
 
     const allCookies = document.cookie;
     const splitCookie = allCookies.split('=');
-    const userId = splitCookie[1];
-    $.ajax({
-      method : 'GET',
-      url: '/users/' + userId + '/orders',
-    }).done(function(value) {
-      console.log(value);
-      $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
-
-      value.forEach((element) => {
-        const name = element.menu_item_name;
-        const qty = element.quantity;
-        const price = element.price;
-        const notes = element.notes;
-        const tempString = `
-          <tr>
-            <td>${name}<p>${notes}</p></td>
-            <td>${qty}</td>
-            <td>$${price / 100}</td>
-          </tr>
-        `
-        $('.summBody').append(tempString);
-      })
-    });
+    const userId = splitCookie[2];
+    if (userId) {
+      $.ajax({
+        method : 'GET',
+        url: '/users/' + splitCookie[1][0] + '/orders',
+      }).done(function(value) {
+        $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
+        let total = 0;
+        value.forEach((element) => {
+          const name = element.menu_item_name;
+          const qty = element.quantity;
+          const price = element.price;
+          const notes = element.notes;
+          const tempString = `
+            <tr>
+              <td>${name}<p>${notes}</p></td>
+              <td>${qty}</td>
+              <td>$${price / 100}</td>
+            </tr>
+          `;
+          $('.summBody').append(tempString);
+          total += (qty * price);
+        });
+        const tempStringTotals = `
+        <div class='cartTotalsSum'>
+          <h2>Your total : $${(total) / 100}</h2>
+        </p>
+        `;
+        $('.cartTotals').append(tempStringTotals);
+      });
+    }
   };
 
   const generateCategories = (categories) => {
