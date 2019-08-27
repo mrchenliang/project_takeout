@@ -7,6 +7,14 @@
   background-color: blue;
   color: white;
   text-align: center;
+  z-index: 50;
+  transition-duration: 1s;
+}
+
+.cartPopup:hover {
+  background-color: white;
+  color: blue;
+  cursor: pointer;
 }
 
 .cartPopup > p {
@@ -42,4 +50,16 @@
 .cartTotals {
   background-color: aliceblue;
   text-align: right;
+}
+
+#submitOrder {
+  width: 100%;
+  height: 30px;
+  transition: .75s;
+}
+
+#submitOrder:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
 }

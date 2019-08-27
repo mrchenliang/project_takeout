@@ -137,7 +137,7 @@ module.exports = db => {
   });
 
   //submit the users order (mark as submitted)
-  router.post("/:user_id/orders/submit", (req, res) => {
+  router.put("/:user_id/orders/submit", (req, res) => {
     const user_id = req.params.user_id;
 
     helpers.submitOrder(db, user_id)

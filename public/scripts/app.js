@@ -62,10 +62,11 @@ $(document).ready(function() {
     $('#login').css('display', 'inline-block');
     $('#signup').css('display', 'inline-block');
     $('#logout').css('display', 'none');
+    $('.cartPopup').removeClass('showCart');
     $('#order-progress').text('');
     document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'userName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-    // document.cookie = 'userName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    $('.cartTotals').empty();
   });
 
   $("#mainRegisterForm").submit(function() {
