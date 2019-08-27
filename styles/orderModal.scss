@@ -1,0 +1,12 @@
+#orderModal {
+  position: fixed;
+  padding: 2em;
+}
+
+#orderModal > .image > .modalImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+

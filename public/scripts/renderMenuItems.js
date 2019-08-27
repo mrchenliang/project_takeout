@@ -42,8 +42,9 @@ const renderMenuItems = function(data) {
   const generateMenuItems = (menuItems) => {
 
     menuItems.forEach(element => {
+      console.log(element);
       let menuItemTemplateString = `
-      <div class='singleMenuItem'>
+      <div class='singleMenuItem' data-itemId="${element.id}">
         <div class='menuItemDescription'>
           <h2>${element.name}</h2>
           <p>${element.description}</p>
@@ -87,13 +88,21 @@ const renderMenuItems = function(data) {
 
   // ON CLICK LISTENER AND RENDER ADD TO CART MODAL
   $('.singleMenuItem').on('click', function() {
-    const title = $(this).children('.menuItemDescription').children('h2')[0].innerHTML;
-    const description = $(this).children('.menuItemDescription').children('p')[0].innerHTML;
-    const price = $(this).children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
-    const image = $(this).children('.menuItemImage').css("background-image");
+    const slct = $(this).attr('data-itemId');
+
+    const title = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h2')[0].innerHTML;
+    const description = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('p')[0].innerHTML;
+    const itemId = $('div[data-itemId="' + slct + '"').attr('data-itemId');
+    const price = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
+    const image = $('div[data-itemId="' + slct + '"').children('.menuItemImage').css("background-image");
+
+    // let description = $(this).children('.menuItemDescription').children('p')[0].innerHTML;
+    // let itemId = $(this).attr('data-itemId');
+    // let price = $(this).children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
+    // let image = $(this).children('.menuItemImage').css("background-image");
     let quantity = 1;
 
-    const modal =
+    const orderModal =
       `<div class="ui modal" id="orderModal">
         <div class="header">
           <h1>Add to Order</h1>
@@ -103,58 +112,71 @@ const renderMenuItems = function(data) {
         </div>
         <div class="modalTitle">
           <h2>${title}</h2>
+          <p>${description}</p>
+          <h3>$ ${price}</h3>
         </div>
-        <div class="modalDescription">
-          ${description}
-        </div>
-        <div class="modalPrice">
-          <h2>$ ${price}</h2>
-        </div>
-        <form class="ui form" id="addItemForm">
-          <table>
-            <div class="field">
-              <label>Notes (optional):</label>
-              <input type="text" name="notes" placeholder="Make it blessed.">
+        <form class="ui form" id="addItemForm-${itemId}" action="/users/1/orders" method="POST">
+          <h4>Notes (optional):</h4>
+          <input type="text" name="notes" placeholder="Make it blessed.">
+          <div class="quantityInput field">
+            <button class="positive ui button" id="addQuantity">Add</button>
+            <button class="negative ui button" id="removeQuantity">Remove</button>
+            <input type="text" name="quantity" id="quantity" readonly value=${quantity} style="border:none">
+            <p>x $${price}</p>
+            <p id=totalPrice>Total: $${quantity*price}</p>
+            <input type=text name="menu_item_id" style="display: none" value="${itemId}">
+          </div>
+          <div class="actions">
+            <div class="ui large buttons">
+              <button class="ui button" id="addToOrder">Add to Order</button>
             </div>
-            <div class="field">
-              <button class="positive ui button" id="addQuantity">Add</button>
-              <button class="negative ui button" id="removeQuantity">Remove</button>
-              <h2>1 x </h2><input type="text" name="quantity" readonly style="border:none"><h3 id="quantity">${quantity}</h3>
-            </div>
-            <div class="field">
-              <h3 id=totalPrice>Total: $${quantity*price}</h3>
-            </div>
-            <div class="actions">
-              <div class="ui large buttons">
-                <button class="ui button active">Keep Browsing</button>
-                <div class="or"></div>
-                <button class="ui button">Checkout</button>
-              </div>
-            </div>
-          </table>
+          </div>
         </form>
       </div>`;
 
-    $("#rootContainer").append(modal);
+    $("#rootContainer").append(orderModal);
 
-    $('#addQuantity').on('click', function() {
+    $('#orderModal #addQuantity').on('click', function() {
       event.preventDefault();
       quantity++;
-      $('#quantity')[0].innerHTML = `${quantity}`;
-      $('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
-      let count = $("#quantity")[0].innerHTML;
-      $('#addItemForm input[name=quantity]').val(count);
-      console.log(count);
-      console.log($('#addItemForm input[name=quantity]').val());
+      let quantityElement = $('#orderModal #quantity');
+      quantityElement.prop('readonly',false);
+      quantityElement.val(`${quantity}`);
+      quantityElement.prop('readonly',true);
+      $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
     });
 
-    $('#removeQuantity').on('click', function() {
+    $('#orderModal #removeQuantity').on('click', function() {
       event.preventDefault();
       if (quantity > 1) {
         quantity--;
-        $('#quantity')[0].innerHTML = `${quantity}`;
-        $('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
+        let quantityElement = $('#orderModal #quantity');
+        quantityElement.prop('readonly',false);
+        quantityElement.val(`${quantity}`);
+        quantityElement.prop('readonly',true);
+        $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
       };
+    });
+
+    $(`#addItemForm-${itemId}`).on('submit', function() {
+      console.log($(this));
+
+      event.preventDefault();
+      const formData = $(this).serialize();
+      console.log(formData);
+
+      $.ajax({
+        method : 'POST',
+        url: $(this).attr('action'),
+        data : formData
+      }).done(function(value) {
+        if (value.error == 'Error') {
+          console.log(value);
+        } else {
+          // console.log(value);
+        }
+        $('.ui.modal').modal('hide');
+      })
     });
 
     $('#orderModal').modal('show');
