@@ -123,9 +123,10 @@ module.exports = db => {
   router.delete("/:user_id/orders", (req, res) => {
     const user_id = req.params.user_id;
     const menu_item_id = req.body.menu_item_id;
+    const notes = req.body.notes;
 
     helpers
-      .deleteFromOrder(db, user_id, menu_item_id)
+      .deleteFromOrder(db, user_id, menu_item_id, notes)
       .then(result => {
         res.send(result);
       })
