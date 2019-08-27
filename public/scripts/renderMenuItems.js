@@ -1,6 +1,37 @@
 const renderMenuItems = function(data) {
   $("#rootContainer").empty();
 
+  const generateCartPopup = function() {
+    const popupTemplateString = `
+    <div class='cartDetails'>
+      <div class='cartDetailsTitle'>
+      </div>
+      <div class='cartDetailsContent'>
+      </div>
+      <div class='cartTotals'>
+      </div>
+    </div>
+    <div class='cartPopup'>
+      <p>YOUR ORDER</p>
+    </div>`;
+    $('#rootContainer').append(popupTemplateString);
+
+    $('.cartPopup').on('click', () => {
+      $('.cartDetails').toggleClass('showCart');
+      generateCartPopupDetails();
+    })
+  }
+
+  const generateCartPopupDetails = function() {
+    const allCookies = document.cookie;
+    const userId = allCookies.userId;
+    $.ajax({
+      method : 'GET',
+      url: '/users/' + userId + '/orders',
+    }).done(function(value) {
+      console.log(value);
+  }
+
   const generateCategories = (categories) => {
     const categoryArray = [];
     let categoryTemplateString = '';
@@ -42,7 +73,6 @@ const renderMenuItems = function(data) {
   const generateMenuItems = (menuItems) => {
 
     menuItems.forEach(element => {
-      console.log(element);
       let menuItemTemplateString = `
       <div class='singleMenuItem' data-itemId="${element.id}">
         <div class='menuItemDescription'>
@@ -55,7 +85,6 @@ const renderMenuItems = function(data) {
       </div>
       `;
       const selector = element.category_name;
-      console.log(selector);
       $('div[data-category="' + selector + '"').append(menuItemTemplateString);
     });
 
@@ -85,6 +114,7 @@ const renderMenuItems = function(data) {
   $("#rootContainer").append(newTemplateString);
   generateCategories(data);
   generateMenuItems(data);
+  generateCartPopup();
 
 
   // ON CLICK LISTENER AND RENDER ADD TO CART MODAL
@@ -160,11 +190,9 @@ const renderMenuItems = function(data) {
     });
 
     $(`#addItemForm-${itemId}`).on('submit', function() {
-      console.log($(this));
 
       event.preventDefault();
       const formData = $(this).serialize();
-      console.log(formData);
 
       $.ajax({
         method : 'POST',
@@ -172,7 +200,6 @@ const renderMenuItems = function(data) {
         data : formData
       }).done(function(value) {
         if (value.error == 'Error') {
-          console.log(value);
         } else {
           // console.log(value);
         }
