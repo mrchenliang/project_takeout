@@ -7,6 +7,17 @@ const renderMenuItems = function(data) {
       <div class='cartDetailsTitle'>
       </div>
       <div class='cartDetailsContent'>
+        <table class='ui celled table'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Qty</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody class='summBody'>
+          </tbody>
+        </table>
       </div>
       <div class='cartTotals'>
       </div>
@@ -17,19 +28,39 @@ const renderMenuItems = function(data) {
     $('#rootContainer').append(popupTemplateString);
 
     $('.cartPopup').on('click', () => {
-      $('.cartDetails').toggleClass('showCart');
       generateCartPopupDetails();
+      $('.cartDetails').toggleClass('showCart');
     })
   }
 
   const generateCartPopupDetails = function() {
+    $(`.summBody`).empty();
+    $(`.cartDetailsTitle`).empty();
+
     const allCookies = document.cookie;
-    const userId = allCookies.userId;
+    const splitCookie = allCookies.split('=');
+    const userId = splitCookie[1];
     $.ajax({
       method : 'GET',
       url: '/users/' + userId + '/orders',
     }).done(function(value) {
       console.log(value);
+      $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
+
+      value.forEach((element) => {
+        const name = element.menu_item_name;
+        const qty = element.quantity;
+        const price = element.price;
+        const notes = element.notes;
+        const tempString = `
+          <tr>
+            <td>${name}<p>${notes}</p></td>
+            <td>${qty}</td>
+            <td>$${price / 100}</td>
+          </tr>
+        `
+        $('.summBody').append(tempString);
+      })
     });
   };
 
@@ -96,12 +127,12 @@ const renderMenuItems = function(data) {
   <div>
     <div class='leftSideBar'>
       <div class='restImage' style='background-image: url("${data[0].restaurant_image_url}")'>
-      </div>
       <div class='restInfo'>
         <p>${data[0].restaurant_name}</p>
         <p>${data[0].restaurant_phone}</p>
         <p>${data[0].restaurant_website}</p>
         <p>${data[0].restaurant_address}</p>
+      </div>
       </div>
     </div>
     <div class='menuItems'>
