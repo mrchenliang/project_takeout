@@ -17,7 +17,7 @@ module.exports = (db) => {
 
   //get order details from specific restaurant and specific order
   router.get("/:client_id/orders/:order_id", (req, res) => {
-    helpers.getOrderByID(db, req.params.order_id).then(result => res.send(result));
+    helpers.getOrderDetailsById(db, req.params.order_id).then(result => res.send(result));
   });
 
   //post order details from specific restaurant and specific order
