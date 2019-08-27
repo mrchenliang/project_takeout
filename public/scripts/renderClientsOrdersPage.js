@@ -7,7 +7,7 @@ const renderClientsOrdersPage = function(data) {
   data.forEach(element => {
     const newOrder = `
     <div class = "order-card-wrap" data-orderID='${element.order_id}'>
-    <div class="ui raised very padded text container segment status-${element.order_status}" >
+    <div class="ui raised very padded text container segment status-${element.order_status}" data-orderidstatus=${element.order_id}'>
   <h2 class="ui header order-card-wrap" >Order ID: ${element.order_id} </h2>
   <div class='orders-usersID'>
   <h1>Customer Name: ${element.name}</h1>
@@ -24,6 +24,7 @@ const renderClientsOrdersPage = function(data) {
   <div class='confirm-completed' data-id='${element.order_id}'>
   <button class="ui secondary button">
   ${(element.order_status == 'submitted') ? 'Confirm' : 'Pick Up'}</button>
+</div>
 </div>
 </div>
 </div>
@@ -49,5 +50,4 @@ const renderClientsOrdersPage = function(data) {
     $.ajax(queryString, { method: 'POST' })
     .done((value)=> {console.log(value)})
   });
-
 };
