@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const helpers = require('../lib/dbHelpers.js');
+const sendMessage = require('./send_sms');
 
 module.exports = (db) => {
   //get all orders from a specific restaurant
@@ -35,7 +36,22 @@ module.exports = (db) => {
   //update an order to confirmed if it currently has a status of submitted and sets it to completed if the order is currently confirmed
   router.post("/:client_id/orders/:order_id", (req, res) => {
     helpers.markOrder(db, req.params.order_id)
-      .then(result => res.send(result))
+      .then(result => {
+        const markOrderResult = result[0];
+        const user_id = result[0].user_id;
+        helpers.getUserById(db, user_id)
+          .then(result => {
+            const phone = result.phone;
+            console.log(markOrderResult);
+            if (markOrderResult.status === "confirmed"){
+              sendMessage("Your order has been confirmed and is being prepared. Hold tight!", result.phone);
+            } else if (markOrderResult.status === "completed"){
+              sendMessage("Your order is ready for pick up. Enjoy!", result.phone);
+            }
+            //send sms message
+            res.send(markOrderResult);
+          })
+      })
       .catch(e =>
         setImmediate(() => {
           throw e;
