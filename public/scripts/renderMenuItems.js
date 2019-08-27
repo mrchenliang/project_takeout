@@ -30,6 +30,9 @@ const renderMenuItems = function(data) {
     $('.cartPopup').on('click', () => {
       generateCartPopupDetails();
       $('.cartDetails').toggleClass('showCart');
+      $('.cartDetails').animate({
+        scrollTop: ($('#submitOrder').first().offset().top)
+      },250);
     })
   }
 
@@ -45,29 +48,47 @@ const renderMenuItems = function(data) {
         method : 'GET',
         url: '/users/' + splitCookie[1][0] + '/orders',
       }).done(function(value) {
-        $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
-        let total = 0;
-        value.forEach((element) => {
-          const name = element.menu_item_name;
-          const qty = element.quantity;
-          const price = element.price;
-          const notes = element.notes;
-          const tempString = `
-            <tr>
-              <td>${name}<p>${notes}</p></td>
-              <td>${qty}</td>
-              <td>$${price / 100}</td>
-            </tr>
+        if (value.length !== 0) {
+          $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
+          let total = 0;
+          value.forEach((element) => {
+            const name = element.menu_item_name;
+            const qty = element.quantity;
+            const price = element.price;
+            const notes = element.notes;
+            const tempString = `
+              <tr>
+                <td>${name}<p>${notes}</p></td>
+                <td>${qty}</td>
+                <td>$${price / 100}</td>
+              </tr>
+            `;
+            $('.summBody').append(tempString);
+            total += (qty * price);
+          });
+          $('.cartTotals').empty();
+          const tempStringTotals = `
+          <div class='cartTotalsSum'>
+            <h2>Your total : $${((total) / 100).toFixed(2)}</h2>
+          </p>
           `;
-          $('.summBody').append(tempString);
-          total += (qty * price);
-        });
-        const tempStringTotals = `
-        <div class='cartTotalsSum'>
-          <h2>Your total : $${(total) / 100}</h2>
-        </p>
-        `;
-        $('.cartTotals').append(tempStringTotals);
+          const tempStringButton = `
+          <button id='submitOrder'>PLACE YOUR ORDER
+          </button>
+          `;
+          $('.cartTotals').append(tempStringTotals);
+          $('.cartTotals').append(tempStringButton);
+          $('#submitOrder').on('click', () => {
+            $('.cartDetails').removeClass('showCart');
+            $('.cartTotals').empty();
+            $.ajax({
+              method : 'PUT',
+              url: '/users/' + splitCookie[1][0] + '/orders/submit',
+            }).done((value) => {
+              console.log(value);
+            });
+          });
+        }
       });
     }
   };
@@ -173,6 +194,11 @@ const renderMenuItems = function(data) {
     // let image = $(this).children('.menuItemImage').css("background-image");
     let quantity = 1;
 
+    const allCookies = document.cookie;
+    const splitCookie = allCookies.split('=');
+
+    const userId = splitCookie[1][0];
+
     const orderModal =
       `<div class="ui modal" id="orderModal">
         <div class="header">
@@ -186,7 +212,7 @@ const renderMenuItems = function(data) {
           <p>${description}</p>
           <h3>$ ${price}</h3>
         </div>
-        <form class="ui form" id="addItemForm-${itemId}" action="/users/1/orders" method="POST">
+        <form class="ui form" id="addItemForm-${itemId}" action="/users/${userId}/orders" method="POST">
           <h4>Notes (optional):</h4>
           <input type="text" name="notes" placeholder="Make it blessed.">
           <div class="quantityInput field">
@@ -206,6 +232,9 @@ const renderMenuItems = function(data) {
       </div>`;
 
     $("#rootContainer").append(orderModal);
+
+    $('#addToOrder').on('click',() => {
+      $('.cartDetails').removeClass('showCart') });
 
     $('#orderModal #addQuantity').on('click', function() {
       event.preventDefault();

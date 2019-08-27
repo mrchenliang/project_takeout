@@ -32,9 +32,15 @@ module.exports = (db) => {
       );
   });
 
-  //post order details from specific restaurant and specific order
+  //update an order to confirmed if it currently has a status of submitted and sets it to completed if the order is currently confirmed
   router.post("/:client_id/orders/:order_id", (req, res) => {
-    helpers.markOrderConfirmed(db, req.params.order_id).then(result => res.send(result));
+    helpers.markOrder(db, req.params.order_id)
+      .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
   });
 
   return router;
