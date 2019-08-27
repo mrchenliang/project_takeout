@@ -21,8 +21,19 @@
   right: 25px;
   background-color: blue;
   display: none;
+  overflow: auto;
+}
+
+.cartDetails p {
+  color: grey;
+  font-size: 10px;
 }
 
 .showCart {
   display: inline-block;
+}
+
+.cartDetailsTitle {
+  color: white;
+  text-align: center;
 }
