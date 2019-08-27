@@ -49,5 +49,9 @@ const renderClientsOrdersPage = function(data) {
     const queryString = `/clients/2/orders/${orderId}`;
     $.ajax(queryString, { method: 'POST' })
     .done((value)=> {console.log(value)})
+    setTimeout($.ajax('/clients/2/orders', { method: 'GET' })
+      .done(function(value) {
+      renderClientsOrdersPage(value);
+      }), 5000);
   });
 };
