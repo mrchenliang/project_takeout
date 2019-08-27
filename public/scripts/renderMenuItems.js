@@ -49,27 +49,48 @@ const renderMenuItems = function(data) {
         url: '/users/' + splitCookie[1][0] + '/orders',
       }).done(function(value) {
         if (value.length !== 0) {
+          console.log(value);
           $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
           let total = 0;
+          let count = 0;
           value.forEach((element) => {
+            count ++;
             const name = element.menu_item_name;
             const qty = element.quantity;
             const price = element.price;
             const notes = element.notes;
             const tempString = `
-              <tr>
-                <td>${name}<p>${notes}</p></td>
+              <tr class='entry${count}'>
+                <td>${name}<i class="window close outline icon closeIcon" data-icon="${count}"></i><p>${notes}</p></td>
                 <td>${qty}</td>
                 <td>$${price / 100}</td>
               </tr>
             `;
             $('.summBody').append(tempString);
-            total += (qty * price);
+            $('i[data-icon="' + count + '"').on('click', () => {
+              const clickedElement = $(event.target);
+              $('.entry' + clickedElement[0].dataset.icon).remove();
+
+              const oldVal = $('#theTotal').text();
+              console.log(oldVal);
+              $('#theTotal').text((oldVal - ((price) / 100)).toFixed(2));
+              $.ajax({
+                method : 'DELETE',
+                url: '/users/' + splitCookie[1][0] + '/orders',
+                data: `menu_item_id=${value.menu_item_id}&notes=${notes}`
+              }).done((result) => {
+                generateCartPopupDetails();
+              })
+
+              // console.log($(this));
+              // console.log($(this).parent());
+            });
+            total += price;
           });
           $('.cartTotals').empty();
           const tempStringTotals = `
           <div class='cartTotalsSum'>
-            <h2>Your total : $${(total) / 100}</h2>
+            <h2>Your total : $<span id='theTotal'>${(total) / 100}</span></h2>
           </p>
           `;
           const tempStringButton = `
