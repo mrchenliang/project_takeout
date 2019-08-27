@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <!--ALL SCRIPTS-->
+    <script type="text/javascript" src="/scripts/renderClientsLandingPage.js"></script>
+    <script type="text/javascript" src="/scripts/renderClientsOrdersPage.js"></script>
+  </head>
+
+
+  <body>
+    <% include partials/sidebar.ejs %>
+    <div class ='container'>
+    <div id='clientsLeftContainer'></div>
+    <div id='clientsRightContainer'></div>
+    </div>
+    <% include partials/footer.ejs %>
+  </body>
+</html>

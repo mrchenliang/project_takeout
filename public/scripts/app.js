@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-  // INITIAL LOADING OF THE INDEX PAGE
+  // INITIAL LANDING OF THE INDEX PAGE
   $.ajax('/restaurants', { method: 'GET' })
     .done(function(value) {
-      renderLoadingPage(value);
+      renderLandingPage(value);
     });
 
   // ON CLICK LISTENER AND RENDER RESTAURANTS PAGE
@@ -11,6 +11,20 @@ $(document).ready(function() {
     $.ajax('/restaurants', { method: 'GET' })
       .done(function(value) {
         renderRestaurantsPage(value);
+      });
+  });
+
+  // INITAL LANDING PAGE FOR CLIENTS
+  $.ajax('/clients', { method: 'GET' })
+  .done(function(value) {
+    renderClientsLandingPage(value);
+  });
+
+// ON CLICK LISTENER AND RENDER ORDERS PAGE
+  $('.orders-list').on('click', () => {
+    $.ajax('/clients/2/orders', { method: 'GET' })
+      .done(function(value) {
+      renderClientsOrdersPage(value);
       });
   });
 

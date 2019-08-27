@@ -1,0 +1,58 @@
+#clientsLanding {
+  height: 100vh;
+  width: 100%;
+  background-image: url("https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80");
+  background-repeat:no-repeat;
+  background-size:cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#clients-landing-text {
+  background-color: azure;
+  font-size: 5em;
+  border-radius: 5px;
+}
+
+#landingInstructions {
+  height: 60vh;
+  width: 100%;
+  background: #1b1c1d;
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+}
+
+#landingRestaurants {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 60px 0px;
+}
+
+.image {
+  height: 192px;
+  width: 290px;
+  overflow: hidden;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  position: absolute;
+  left: -1000%;
+  right: -1000%;
+  top: -1000%;
+  bottom: -1000%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+}

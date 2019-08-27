@@ -1,4 +1,4 @@
-const renderLoadingPage = function(data) {
+const renderLandingPage = function(data) {
   $("#rootContainer").empty();
 
   const newTemplateString = `
