@@ -60,9 +60,6 @@ const renderMenuItems = function(data) {
 
   };
 
-  const generateOrderCartPopup = () {
-
-  }
 
   const newTemplateString = `
   <div>
@@ -87,6 +84,5 @@ const renderMenuItems = function(data) {
   $("#rootContainer").append(newTemplateString);
   generateCategories(data);
   generateMenuItems(data);
-  generateOrderCartPopup();
 
 };
