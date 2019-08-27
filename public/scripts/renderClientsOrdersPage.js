@@ -10,7 +10,7 @@ const renderClientsOrdersPage = function(data) {
     <div class="ui raised very padded text container segment status-${element.order_status}" >
   <h2 class="ui header order-card-wrap" >Order ID: ${element.order_id} </h2>
   <div class='orders-usersID'>
-  <h1>${element.name}</h1>
+  <h1>Customer Name: ${element.name}</h1>
   </div>
   <div class='orders-placed_at'>
   Order Placed At: ${element.placed_at}
@@ -21,7 +21,7 @@ const renderClientsOrdersPage = function(data) {
   <div class='status'>
   Status: ${element.order_status}
   </div>
-  <div id='confirm-copmpleted'>
+  <div class='confirm-completed' data-id='${element.order_id}'>
   <button class="ui secondary button">
   ${(element.order_status == 'submitted') ? 'Confirm' : 'Pick Up'}</button>
 </div>
@@ -38,28 +38,16 @@ const renderClientsOrdersPage = function(data) {
     const queryString = `/clients/2/orders/${orderId}`;
 
     $.ajax(queryString, { method: "GET" }).done(function(value) {
-      console.log(value);
+      console.log(value)
       renderOrdersDetail(value);
     });
   });
 
-  $('.order-card').on('click', function() {
-    const orderId = $(this).data().orderId;
-    const queryString = `/restaurants/${restId}`;
-
-    $.ajax(queryString, { method: 'GET' })
-      .done(function(value) {
-        renderOrdersDetail(value);
-      });
+  $('.confirm-completed').on('click', function() {
+    const orderId = $(this).data().id;
+    const queryString = `/clients/2/orders/${orderId}`;
+    $.ajax(queryString, { method: 'POST' })
+    .done((value)=> {console.log(value)})
   });
 
-  // $('.order-card').on('click', function() {
-  //   const orderId = $(this).data().orderId;
-  //   const queryString = `/restaurants/${restId}`;
-
-  //   $.ajax(queryString, { method: 'GET' })
-  //     .done(function(value) {
-  //       renderOrdersDetail(value);
-  //     });
-  // });
 };

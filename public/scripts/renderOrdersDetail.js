@@ -1,36 +1,45 @@
 const renderOrdersDetail = function(data) {
-  console.log(data)
   $("#clientsRightContainer").empty();
 
-let newTemplateString = ``;
+let info =
+`<h1>Customer: ${data[0].user_name}</h1>
+<h1>Order ID: ${data[0].order_id}</h1>`;
+let newTemplateString = `
+<table class="ui celled padded table">
+<thead>
+  <tr><th class="single line">Menu Item</th>
+  <th>Comments</th>
+  <th>Quantity</th>
+  <th>Unit Price</th>
+  <th>Total Price</th>
+</tr></thead>`;
 
 data.forEach(element => {
   const newItem = `
-  <div class = "display-order'>
-  <div class="ui raised very padded text container segment" >
-<h2 class="ui header order-card-wrap" >Order ID: ${element.order_id} </h2>
-<div class='orders-usersID'>
-<h1>${element.name}</h1>
-</div>
-<div class='orders-placed_at'>
-Order Placed At: ${element.placed_at}
-</div>
-<div class='total'>
-Total: $ ${element.total_price / 100}
-</div>
-<div class='status'>
-Status: ${element.order_status}
-</div>
-<div id='confirm-copmpleted'>
-<button class="ui secondary button">
-${(element.order_status == 'submitted') ? 'Confirm' : 'Pick Up'}</button>
-</div>
-</div>
-</div>
+
+  <tbody>
+    <tr>
+      <td>
+        <h2 class="ui center aligned header">${element.menu_item_name}</h2>
+      </td>
+      <td>${(element.notes != '') ? element.notes : '' }</td>
+      <td class="single line">
+      ${element.quantity}
+      </td>
+      <td class="single line">
+      $ ${element.price / 100}
+      </td>
+      <td class="right aligned">
+      $ ${element.price * element.quantity / 100}
+      </td>
+
+    </tr>
   `;
+  newTemplateString += newItem;
+})
 
-    newTemplateString += newItem;
 
+  $("#clientsRightContainer").append(info);
   $("#clientsRightContainer").append(newTemplateString);
 
 };
