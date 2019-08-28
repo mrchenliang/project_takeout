@@ -1,13 +1,13 @@
 .ui.status-completed {
-  background-color: grey;
+  background-color: #7c7c7c
 }
 
 .ui.status-submitted {
-  background-color: red;
+  background-color:  #fc8888
 }
 
 .ui.status-confirmed {
-  background-color: green;
+  background-color: #88ff88
 }
 
 #order-card {
@@ -18,13 +18,38 @@
 .maincontainer {
   display: flex;
   justify-content: space-around;
-
 }
 
-#clientsLeftContainer {
-  left: 10%;
+.left {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  height: 100vh;
+  will-change: overflow;
+  margin-left: 5%;
+  width: 42%;
+  overflow: auto;
+  padding: .5rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
 }
+
+.right {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  height: 100vh;
+  will-change: overflow;
+  width: 50%;
+  right: 0;
+  overflow: auto;
+  padding: .5rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+
 
 .background-color {
 background-color:  #f0e9f5;
 }
+
