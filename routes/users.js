@@ -49,9 +49,20 @@ module.exports = db => {
     });
   })
 
-  //get all orders from a specific restaurant
+  //get all orders from the user's history
   router.get("/:user_id/allOrders", (req, res) => {
     helpers.getUsersAllOrderDetails(db, req.params.user_id)
+      .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //get specific order details
+  router.get("/:user_id/orders/:order_id", (req, res) => {
+    helpers.getOrderDetails(db, req.params.user_id, req.params.order_id)
       .then(result => res.send(result))
       .catch(e =>
         setImmediate(() => {
