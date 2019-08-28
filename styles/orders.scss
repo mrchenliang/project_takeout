@@ -1,17 +1,29 @@
 .ui.status-completed {
-  background-color: #7c7c7c
+  background-color: #7c7c7c;
 }
 
 .ui.status-submitted {
-  background-color:  #fc8888
+  background-color:  #fc8888;
 }
 
 .ui.status-confirmed {
-  background-color: #88ff88
+  background-color: #88ff88;
+}
+
+.ui.raised.segment {
+  margin-bottom: 2.5vh;
+  border-radius: 5px;
+}
+
+.ui.raised.segment:hover {
+  box-shadow: 20px 20px 20px -5px rgba(0,0,0,0.75);
+  transform: scale(1.02);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #order-card {
-  height: 25vh;
+  height: 20vh;
   margin-left: 5vh;
 }
 
@@ -51,5 +63,9 @@
 
 .background-color {
 background-color:  #f0e9f5;
+}
+
+.status {
+  text-transform: capitalize;
 }
 

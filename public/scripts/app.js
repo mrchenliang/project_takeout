@@ -33,6 +33,67 @@ $(document).ready(function() {
       });
   });
 
+// ON CLICK LISTENER AND RENDER ORDERS HISTORY PAGE
+  $('.orders-history').on('click', () => {
+    $.ajax('/clients/2/history', { method: 'GET' })
+      .done(function(value) {
+      renderClientsHistoryPage(value);
+      });
+  });
+
+  // ON CLICK LISTENER AND RENDER HOME PAGE
+  $('.home-page').on('click', () => {
+    $.ajax('/clients', { method: 'GET' })
+    .done(function(value) {
+    renderClientsLandingPage(value);
+    });
+  });
+
+  $('#client-login').on('click', () => {
+    $('#clientLoginModal').modal('show');
+  });
+
+  $('.exitCL').on('click', () => {
+    $('#clientLoginModal').modal('hide');
+  });
+
+  $('#client-login').on('click', () => {
+    $('#login').css('display', 'inline-block');
+    $('#signup').css('display', 'inline-block');
+    $('#logout').css('display', 'none');
+    $('.cartPopup').removeClass('showCart');
+    $('#order-progress').text('');
+    document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'userName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    $('.cartTotals').empty();
+  });
+
+  $("#clientLoginForm").submit(function() {
+    event.preventDefault();
+    const formArray = $('#clientLoginForm').serializeArray();
+    $.ajax('/users/login', { method : 'POST', data : {
+      email: formArray[0].value,
+      password: formArray[1].value,
+    } }).done(function(value) {
+      if (value.error == 'Error') {
+        $('.loginHeader').text('Login failed. Please check your credentials.');
+      } else {
+        console.log(value);
+        document.cookie = 'userId=' + value.id;
+        document.cookie = 'userName=' + value.name;
+        $('#loginModal').modal('hide');
+        $('#login').css('display', 'none');
+        $('#signup').css('display', 'none');
+        $('#logout').css('display', 'inline-block');
+        $('#order-progress').text("You're logged in as:  " + value.name + '   >>>  VIEW ORDERS');
+        $('#order-progress').on('click', () => {
+          console.log('clicked');
+        });
+      }
+    })
+  });
+
+
   $('#login').on('click', () => {
     $('#loginModal').modal('show');
   });
