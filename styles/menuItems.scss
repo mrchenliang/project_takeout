@@ -34,12 +34,15 @@
   margin-bottom: 3em;
   border-bottom: 1px solid darkgray;
   padding: 10px;
+  transition: 0.5s;
 }
 
 .singleMenuItem:hover {
   cursor: pointer;
   background-color: azure;
   border-radius: 10px;
+  opacity: 0.8;
+  box-shadow: 19px 15px 23px -11px rgba(0,0,0,0.75);
 }
 
 .leftSideBar {
@@ -47,6 +50,7 @@
   position: fixed;
   height: 100vh;
   width: 25%;
+  // z-index: 55;
 }
 
 .restImage {
@@ -77,11 +81,13 @@
 }
 
 #rightSideBar {
- margin-top: 150px;
  position: fixed;
- top: 0;
+ top: 0px;
  right: 0;
  width: 15%;
+ margin-top: 140px;
+ border-left: 1px solid black;
+ padding-left: 1em;
 }
 
 #rightSideBar h2:hover {
