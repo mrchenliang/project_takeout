@@ -35,16 +35,19 @@ module.exports = (db) => {
 
   //update an order to confirmed if it currently has a status of submitted and sets it to completed if the order is currently confirmed
   router.post("/:client_id/orders/:order_id", (req, res) => {
-    helpers.markOrder(db, req.params.order_id)
+    const order_id = req.params.order_id;
+    const est_time = req.body.est_time;
+
+    helpers.markOrder(db, order_id, est_time)
       .then(result => {
         const markOrderResult = result[0];
         const user_id = result[0].user_id;
         helpers.getUserById(db, user_id)
           .then(result => {
             const phone = result.phone;
-            console.log(markOrderResult);
+            //console.log(markOrderResult);
             if (markOrderResult.status === "confirmed") {
-              sendMessage("Your order has been confirmed and is being prepared. Hold tight!", result.phone);
+              sendMessage(`Your order has been confirmed and is being prepared. Estimated wait time is ${markOrderResult.wait_time} minutes. Hold tight!`, result.phone);
             } else if (markOrderResult.status === "completed") {
               sendMessage("Your order is ready for pick up. Enjoy!", result.phone);
             }

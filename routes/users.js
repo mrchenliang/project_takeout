@@ -8,6 +8,7 @@
 const express = require("express");
 const router = express.Router();
 const helpers = require("../lib/dbHelpers.js");
+const sendMessage = require('./send_sms');
 
 module.exports = db => {
   router.get("/", (req, res) => {});
@@ -42,7 +43,7 @@ module.exports = db => {
   //registers the user
   router.post('/', (req, res) => {
     const { name, email, phone, password } = req.body;
-    console.log(name, email, phone, password);
+    // console.log(name, email, phone, password);
     helpers.registerUser(db, name, email, phone, password).then(result => {
       res.send(result)
     });
@@ -62,22 +63,6 @@ module.exports = db => {
         })
       );
   });
-
-  // //returns the users order details by order id
-  // router.get("/:user_id/orders", (req, res) => {
-  //   const user_id = req.params.user_id;
-
-  //   helpers
-  //     .getUsersOrderByOrderId(db, user_id)
-  //     .then(result => {
-  //       res.send(result);
-  //     })
-  //     .catch(e =>
-  //       setImmediate(() => {
-  //         throw e;
-  //       })
-  //     );
-  // });
 
   //add an item to the users order
   router.post("/:user_id/orders", (req, res) => {
@@ -142,8 +127,17 @@ module.exports = db => {
     const user_id = req.params.user_id;
 
     helpers.submitOrder(db, user_id)
-      .then(result => {
-        res.send(result);
+      .then(submitResult => {
+        helpers.getRestaurantById(db, submitResult.restaurant_id)
+          .then(result => {
+            sendMessage(`A new order (Order ID: ${submitResult.id}) has come through. Check the queue!`, result.phone);
+            res.send(submitResult);
+          })
+          .catch(e =>
+            setImmediate(() => {
+              throw e;
+            })
+          );
       })
       .catch(e =>
         setImmediate(() => {
