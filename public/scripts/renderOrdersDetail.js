@@ -12,7 +12,7 @@ data.forEach(element => {
 })
 
 let totalMenu =
-`<h1>Total: $ ${total}</h1>`;
+`<h1>Total: $ ${total.toFixed(2)}</h1>`;
 
 let newTemplateString = `
 <table class="ui celled padded table">
