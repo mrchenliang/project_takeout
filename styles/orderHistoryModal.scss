@@ -1,0 +1,26 @@
+#orderHistoryModal {
+  height: 50vh;
+  width: 75vw;
+}
+
+#contentContainer {
+  display: flex;
+}
+
+#listOfOrders {
+  width: 35%;
+  border-right: 1px solid gray;
+  overflow: auto;
+  display: inline-block;
+}
+
+#singleOrderDetails {
+  width: 65%;
+  height: 100%;
+  display: inline-block;
+  overflow: auto;
+}
+
+.orderTitle {
+  border: 1px solid gray;
+}
