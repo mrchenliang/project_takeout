@@ -26,12 +26,16 @@
 .restaurant-card-wrap {
   width: 65%;
   height: 16.5em;
-  margin: 2em auto;
+  margin: 3em auto;
   position: relative;
   background-color: white;
   border-radius: 10px;
   box-shadow: 19px 15px 23px -11px rgba(0,0,0,0.75);
   transition: .75s;
+}
+
+.restaurant-card-wrap:first-of-type {
+  margin-top: 140px;
 }
 
 .restaurant-card-wrap:hover {
