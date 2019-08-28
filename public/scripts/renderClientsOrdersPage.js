@@ -10,7 +10,7 @@ const renderClientsOrdersPage = function(data) {
     <div class="ui raised very padded text container segment status-${element.order_status}" data-orderidstatus=${element.order_id}'>
   <h2 class="ui header order-card-wrap" >Order ID: ${element.order_id} </h2>
   <div class='orders-usersID'>
-  <h1>Customer Name: ${element.name}</h1>
+  Customer Name: ${element.name}
   </div>
   <div class='orders-placed_at'>
   Order Placed At: ${element.placed_at}
@@ -22,6 +22,9 @@ const renderClientsOrdersPage = function(data) {
   Status: ${element.order_status}
   </div>
   <div class='confirm-completed' data-id='${element.order_id}'>
+  <div class="ui mini icon input">
+  <input type="text" placeholder="Wait Time">
+  </div>
   <button class="ui secondary button">
   ${(element.order_status == 'submitted') ? 'Confirm' : 'Pick Up'}</button>
 </div>
