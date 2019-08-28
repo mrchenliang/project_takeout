@@ -22,11 +22,12 @@ const renderClientsOrdersPage = function(data) {
   Status: ${element.order_status}
   </div>
   <div class='confirm-completed' data-id='${element.order_id}'>
-  <div class="ui mini icon input">
+  ${(element.order_status == 'submitted') ?
+  `<div class="ui mini icon input">
   <input type="text" placeholder="Wait Time">
   </div>
-  <button class="ui secondary button">
-  ${(element.order_status == 'submitted') ? 'Confirm' : 'Pick Up'}</button>
+  <button class="ui secondary button"> Confirm </div>` :
+  `<button class="ui secondary button"> Pick Up </div>`}</button>
 </div>
 </div>
 </div>
@@ -52,5 +53,10 @@ const renderClientsOrdersPage = function(data) {
     const queryString = `/clients/2/orders/${orderId}`;
     $.ajax(queryString, { method: 'POST' })
     .done((value)=> {console.log(value)})
+    // $("#clientsLeftContainer").empty();
+    // setTimeout($.ajax('/clients/2/orders', { method: 'GET' })
+    //   .done(function(value) {
+    //   renderClientsOrdersPage(value);
+    //   }), 3000);
   });
 };

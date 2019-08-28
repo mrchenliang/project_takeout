@@ -1,6 +1,6 @@
 .cartPopup {
   height: 35px;
-  width: 250px;
+  width: 325px;
   position: fixed;
   bottom: 10px;
   right: 25px;
@@ -23,13 +23,15 @@
 
 .cartDetails {
   height: 250px;
-  width: 250px;
+  width: 325px;
   position: fixed;
   bottom: 45px;
   right: 25px;
-  background-color: blue;
+  background-color: white;
   display: none;
   overflow: auto;
+  z-index: 55;
+  border: 4px solid darkgray;
 }
 
 .cartDetails p {
@@ -61,5 +63,16 @@
 #submitOrder:hover {
   background-color: blue;
   color: white;
+  cursor: pointer;
+}
+
+.closeIcon {
+  float: right;
+  color: red;
+  transition: .5s;
+}
+
+.closeIcon:hover {
+  transform: scale(1.5);
   cursor: pointer;
 }

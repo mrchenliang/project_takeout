@@ -18,21 +18,37 @@
 .maincontainer {
   display: flex;
   justify-content: space-around;
-
+  overflow: hidden;
+  margin-top: -100px;
+  padding-top: 100px;
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: overflow;
 }
 
-#clientsLeftContainer {
+.left {
   margin-left: 5%;
-  overflow: hidden;
   width: 40%;
+  overflow: auto;
+  height: auto;
+  padding: .5rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
 }
 
-#clientsRightContainer {
+.right {
   right: 0;
-  overflow: hidden;
   width: 50%;
+  overflow: auto;
+  height: auto;
+  padding: .5rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
 }
+
 
 .background-color {
 background-color:  #f0e9f5;
 }
+
