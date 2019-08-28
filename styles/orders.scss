@@ -18,30 +18,31 @@
 .maincontainer {
   display: flex;
   justify-content: space-around;
-  overflow: hidden;
-  margin-top: -100px;
-  padding-top: 100px;
-  position: relative;
-  width: 100%;
-  backface-visibility: hidden;
-  will-change: overflow;
 }
 
 .left {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  height: 100vh;
+  will-change: overflow;
   margin-left: 5%;
-  width: 40%;
+  width: 42%;
   overflow: auto;
-  height: auto;
   padding: .5rem;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
 }
 
 .right {
-  right: 0;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  height: 100vh;
+  will-change: overflow;
   width: 50%;
+  right: 0;
   overflow: auto;
-  height: auto;
   padding: .5rem;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
