@@ -3,7 +3,6 @@ const generateAllOrders = function() {
 
   const allCookies = document.cookie;
   const splitCookie = allCookies.split('=');
-  const userId = splitCookie[2];
 
   $.ajax({
     method : 'GET',
@@ -28,11 +27,17 @@ const generateAllOrders = function() {
 }
 
 const generateSingleOrder = function (order_id) {
+
   $('#singleOrderDetails').empty();
+  const allCookies = document.cookie;
+  const splitCookie = allCookies.split('=');
+
+
   $.ajax({
     method : 'GET',
-    url: '/users/' + order_id + '/allOrders',
+    url: '/users/' + splitCookie[1][0] + '/orders/' + order_id,
   }).done(function(value) {
+    console.log(value);
     const tempString = `
     <div id='mainOrderDiv'>
       <h1></h1>
@@ -44,10 +49,27 @@ const generateSingleOrder = function (order_id) {
             <th>Price</th>
           </tr>
         </thead>
-        <tbody class='summBody'>
+        <tbody class='summBodyHist'>
         </tbody>
       </table>
     </div>`;
     $('#singleOrderDetails').append(tempString);
+
+    value.forEach((element) => {
+      const name = element.menu_item_name;
+      const qty = element.quantity;
+      const price = element.price;
+      const notes = element.notes;
+      const tempStringDet = `
+        <tr>
+          <td>${name}<p>${notes}</p></td>
+          <td>${qty}</td>
+          <td>$${price / 100}</td>
+        </tr>
+      `;
+      $('.summBodyHist').append(tempStringDet);
+
   });
-};
+})
+}
+
