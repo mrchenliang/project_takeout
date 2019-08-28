@@ -14,6 +14,11 @@ $(document).ready(function() {
       });
   });
 
+  // ON CLICK LISTENER AND RENDER RESTAURANTS PAGE
+  $('#logo').on('click', () => {
+    renderLandingPage('data');
+  });
+
   // INITAL LANDING PAGE FOR CLIENTS
   $.ajax('/clients', { method: 'GET' })
   .done(function(value) {

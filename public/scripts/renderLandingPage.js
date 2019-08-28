@@ -39,7 +39,10 @@ const renderLandingPage = function(data) {
 </div>
 
   <div id='landingRestaurants'>
-    <button class="ui secondary button">RESTAURANTS</button>
+
+    <div id='restaurant-button'>
+      <button class="ui secondary button restaurants-link">RESTAURANTS</button>
+    </div>
   </div>
   `;
   $("#rootContainer").append(newTemplateString);
@@ -53,4 +56,11 @@ const renderLandingPage = function(data) {
     $('#logout').css('display', 'inline-block');
     $('#order-progress').text("You're logged in as:  " + userName);
   }
+
+  $('.restaurants-link').on('click', () => {
+    $.ajax('/restaurants', { method: 'GET' })
+      .done(function(value) {
+        renderRestaurantsPage(value);
+      });
+  });
 };
