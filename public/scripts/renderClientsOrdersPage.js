@@ -15,7 +15,7 @@ const renderClientsOrdersPage = function(data) {
   Customer Name: ${element.name}
   </div>
   <div class='orders-placed_at'>
-  Order Placed At: ${dateFormat(element.placed_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
+  Order Placed At: ${moment(element.placed_at).format('MMMM Do YYYY, h:mm:ss a')}
   </div>
   <div class='total'>
   Total: $ ${(element.total_price / 100).toFixed(2)}

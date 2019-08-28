@@ -10,7 +10,7 @@ const sass       = require("node-sass-middleware");
 const cookieParser = require('cookie-parser');
 const app        = express();
 const morgan     = require('morgan');
-const dateFormat = require('dateformat');
+const dateFormat = require('moment');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -33,7 +33,6 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 app.use(cookieParser());
-app.use(dateFormat());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
