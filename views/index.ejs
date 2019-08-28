@@ -19,6 +19,7 @@
     <script type="text/javascript" src="/scripts/renderMenuItems.js"></script>
     <script type="text/javascript" src="/scripts/renderClientsLandingPage.js"></script>
     <script type="text/javascript" src="/scripts/renderClientsOrdersPage.js"></script>
+    <script type="text/javascript" src="/scripts/ordersDropdown.js"></script>
   </head>
 
 
@@ -46,7 +47,29 @@
             <button>Submit</button>
             <span class='exitR'>EXIT</span>
           </form>
-        </div>
+      </div>
+
+      <div class="ui modal" id='orderHistoryModal'>
+          <i class="close icon"></i>
+          <div class="header">
+            Your orders
+          </div>
+          <div class="content" id='contentContainer'>
+            <div class="ui medium" id='listOfOrders'>
+              These are orders
+            </div>
+            <div class="description" id='singleOrderDetails'>
+              This is the description for orders
+            </div>
+          </div>
+          <div class="actions">
+            <div class="ui positive right labeled icon button">
+              EXIT
+              <i class="checkmark icon"></i>
+            </div>
+          </div>
+
+
     <!-- <% include partials/footer.ejs %> -->
   </body>
 </html>

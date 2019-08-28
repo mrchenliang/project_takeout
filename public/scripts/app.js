@@ -53,7 +53,10 @@ $(document).ready(function() {
         $('#login').css('display', 'none');
         $('#signup').css('display', 'none');
         $('#logout').css('display', 'inline-block');
-        $('#order-progress').text("You're logged in as:  " + value.name);
+        $('#order-progress').text("You're logged in as:  " + value.name + '   >>>  VIEW ORDERS');
+        $('#order-progress').on('click', () => {
+          console.log('clicked');
+        });
       }
     })
   });
@@ -85,7 +88,10 @@ $(document).ready(function() {
     $('#login').css('display', 'none');
     $('#signup').css('display', 'none');
     $('#logout').css('display', 'inline-block');
-    $('#order-progress').text("You're logged in as:  " + formArray[0].value);
+    $('#order-progress').text("You're logged in as:  " + formArray[0].value + '   >>>  VIEW ORDERS');
+    $('#order-progress').on('click', () => {
+      console.log('clicked');
+    });
     $('#registerModal').modal('hide');
   });
 
@@ -96,6 +102,9 @@ $(document).ready(function() {
   $('.exitR').on('click', () => {
     $('#registerModal').modal('hide');
   });
+
+
+
 
 
 

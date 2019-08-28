@@ -1,0 +1,18 @@
+#contentContainer {
+  display: flex;
+
+}
+
+#listOfOrders {
+  width: 25%;
+  border-right: 1px solid gray;
+  height: 100%;
+  overflow: auto;
+  display: inline-block;
+}
+
+#singleOrderDetails {
+  width: 75%;
+  height: 100%;
+  display: inline-block;
+}

@@ -7,6 +7,8 @@
 }
 #right-menu {
   align-items: center;
+
+
 }
 
 #login {
@@ -26,6 +28,15 @@
   z-index: 55;
   margin-bottom: 120px;
 }
+
+.ui.modal:not(.compact) {
+  width: calc(100% - 50px) !important;
+  margin-left: 25px !important;
+  height: calc(70% - 50px) !important;
+  margin-top: 25px !important;
+  }
+
+
 
 
 
