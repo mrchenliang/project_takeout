@@ -1,30 +1,38 @@
 const renderClientsOrdersPage = function(data) {
   $("#clients-landing").empty();
+  $("#clientsLeftContainer").empty();
+
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
   let newTemplateString = ``;
-  console.log(data);
 
   data.forEach(element => {
     const newOrder = `
     <div class = "order-card-wrap" data-orderID='${element.order_id}'>
-    <div class="ui raised very padded text container segment status-${element.order_status}" data-orderidstatus=${element.order_id}'>
-  <h2 class="ui header order-card-wrap" >Order ID: ${element.order_id} </h2>
+    <div class="ui raised very padded text container segment status-${element.order_status}">
+  <h2 class="ui header" >Order ID: ${element.order_id} </h2>
   <div class='orders-usersID'>
-  <h1>Customer Name: ${element.name}</h1>
+  Customer Name: ${element.name}
   </div>
   <div class='orders-placed_at'>
-  Order Placed At: ${element.placed_at}
+  Order Placed At: ${moment(element.placed_at).format('MMMM Do YYYY, h:mm:ss a')}
   </div>
   <div class='total'>
-  Total: $ ${element.total_price / 100}
+  Total: $ ${(element.total_price / 100).toFixed(2)}
   </div>
   <div class='status'>
   Status: ${element.order_status}
   </div>
-  <div class='confirm-completed' data-id='${element.order_id}'>
-  <button class="ui secondary button">
-  ${(element.order_status == 'submitted') ? 'Confirm' : 'Pick Up'}</button>
-</div>
+  <form class='confirm-completed' data-id='${element.order_id}'>
+  ${element.order_status == "submitted"
+      ?
+  `<div class="ui mini icon input">
+  <input type="text" placeholder="Wait Time" id="waittime">
+  </div>
+  <button class="ui secondary button"> Confirm </button>`
+      : `<button class="ui secondary button"> Pick Up </button>`
+  }
+</form>
 </div>
 </div>
 </div>
@@ -39,20 +47,20 @@ const renderClientsOrdersPage = function(data) {
     const queryString = `/clients/2/orders/${orderId}`;
 
     $.ajax(queryString, { method: "GET" }).done(function(value) {
-      console.log(value)
+      console.log(value);
       renderOrdersDetail(value);
     });
   });
 
-  $('.confirm-completed').on('click', function() {
+  $(".confirm-completed").on("submit", function(evt) {
+    evt.preventDefault();
     const orderId = $(this).data().id;
     const queryString = `/clients/2/orders/${orderId}`;
-    $.ajax(queryString, { method: 'POST' })
-    .done((value)=> {console.log(value)})
-    // $("#clientsLeftContainer").empty();
-    // setTimeout($.ajax('/clients/2/orders', { method: 'GET' })
-    //   .done(function(value) {
-    //   renderClientsOrdersPage(value);
-    //   }), 3000);
+    const waitTime = $('#waittime').val();
+    $.ajax({url: queryString, type: "POST", data: { est_time: waitTime }}).done(value => {
+      $.ajax("/clients/2/orders", { method: "GET" }).done(function(value) {
+        renderClientsOrdersPage(value);
+      });
+    });
   });
 };
