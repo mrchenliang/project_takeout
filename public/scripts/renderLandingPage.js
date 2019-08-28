@@ -54,7 +54,13 @@ const renderLandingPage = function(data) {
     $('#login').css('display', 'none');
     $('#signup').css('display', 'none');
     $('#logout').css('display', 'inline-block');
-    $('#order-progress').text("You're logged in as:  " + userName);
+    $('#order-progress').text("You're logged in as:  " + userName + '   >>>  VIEW ORDERS');
+    $('#order-progress').on('click', () => {
+      generateAllOrders();
+      $('#orderHistoryModal')
+        .modal('show')
+      ;
+    });
   }
 
   $('.restaurants-link').on('click', () => {
