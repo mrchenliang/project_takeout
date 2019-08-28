@@ -10,19 +10,22 @@ const generateAllOrders = function() {
     url: '/users/' + splitCookie[1][0] + '/allOrders',
   }).done(function(value) {
     console.log(value);
-  //   const orderTempString = `
-  //   <div class='orderTitle' data-orderHistoryId=${}>
-  //     <h3>ORDER ID : ${}</h3>
-  //     <p>TOTAL : ${}</p>
-  //     <p>Order status : ${}</p>
-  //   </div>
-  //   `;
-  //   $('#listOfOrders').append(orderTempString);
-  //   $('i[data-icon="' + count + '"').on('click', () => {
-  //     const clickedElement = $(event.target);
-  //     console.log(clickedElement);
-  // });
-};
+    value.forEach(element => {
+      const orderTempString = `
+      <div class='orderTitle' data-orderHistoryId=${element.order_id}>
+        <h3>ORDER ID : ${element.order_id}</h3>
+        <p>TOTAL : $${element.total / 100}. \u00A0\u00A0\u00A0\u00A0 Order status : ${element.status}</p>
+      </div>
+      `;
+      $('#listOfOrders').append(orderTempString);
+      $('div[data-orderHistoryId="' + element.order_id + '"').on('click', () => {
+        const clickedElement = $(event.target);
+        const orderId = clickedElement[0].dataset.orderhistoryid;
+        generateSingleOrder(orderId);
+      });
+    });
+});
+}
 
 const generateSingleOrder = function (order_id) {
   $('#singleOrderDetails').empty();
