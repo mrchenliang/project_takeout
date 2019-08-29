@@ -101,6 +101,7 @@ module.exports = db => {
   router.post("/login", (req, res) => {
     const clientId = req.body.clientId;
     const clientPassword = req.body.clientPassword;
+    console.log(clientId);
     helpers
       .getClientByID(db, clientId)
       .then(result => {

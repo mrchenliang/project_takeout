@@ -39,13 +39,21 @@
 }
 
 .ui.secondary.button.refresh {
-  width : 9em;
-  padding-bottom: 22px;
-  margin-bottom: 2vh;
+  width : 8.5em;
+  padding-bottom: 1em;
+  margin-bottom: 10px;
+  min-height: 2.75em;
+  max-height: 2.75em;
+  display: flex;
+  justify-content: center;
 }
 
 .ui.secondary.button.refresh-history {
-  width : 9em;
-  padding-bottom: 22px;
-  margin-bottom: 2vh;
+  width : 8.5em;
+  padding-bottom: 1em;
+  max-height: 2.75em;
+  margin-bottom: 10px;
+  min-height: 2.75em;
+  display: flex;
+  justify-content: center;
 }

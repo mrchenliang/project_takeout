@@ -50,23 +50,17 @@ $(document).ready(function() {
     });
   });
 
-  $("#client-login").on("click", () => {
-    $("#clientLoginModal").modal("show");
-  });
-
   $(".exitCL").on("click", () => {
     $("#clientLoginModal").modal("hide");
   });
 
   $("#client-login").on("click", () => {
-    $("#login").css("display", "inline-block");
-    $("#signup").css("display", "inline-block");
-    $("#logout").css("display", "none");
-    $(".cartPopup").removeClass("showCart");
-    $("#order-progress").text("");
-    document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-    document.cookie = "userName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-    $(".cartTotals").empty();
+    $("#clientLoginModal").modal("show");
+    $("#client-login").css("display", "inline-block");
+    $("#client-logout").css("display", "none");
+    $("#client-loginlogout").text(sessionStorage.getItem('restName'));
+    sessionStorage.setItem("restId", value.id);
+    sessionStorage.setItem("restName", value.name);
   });
 
   $("#clientLoginForm").submit(function() {
@@ -87,7 +81,7 @@ $(document).ready(function() {
         $("#clientLoginModal").modal("hide");
         $("#client-login").css("display", "none");
         $("#client-logout").css("display", "inline-block");
-        $("#client-loginlogout").text(value.name);
+        $("#client-loginlogout").text(sessionStorage.getItem('restName'));
       }
     });
   });
