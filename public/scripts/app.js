@@ -66,7 +66,6 @@ function initMap() {
 }
 
 $(document).ready(function() {
-  // initMap();
 
   if (sessionStorage.getItem('restId')) {
     $("#client-login").css("display", "none");
