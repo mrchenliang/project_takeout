@@ -19,6 +19,9 @@
     <script type="text/javascript" src="/scripts/renderClientsLandingPage.js"></script>
     <script type="text/javascript" src="/scripts/renderClientsOrdersPage.js"></script>
     <script type="text/javascript" src="/scripts/ordersDropdown.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAllv7wgbOCoIcy0VZdFz-um0CgJS7hX4k">
+    </script>
   </head>
 
 
@@ -26,6 +29,7 @@
     <% include partials/navbar.ejs %>
     <div id='rootContainer'>
     </div>
+
     <div class="ui basic modal" id='loginModal'>
         <h2 class='loginHeader'>Please Enter Your Login Information</h2>
         <form action="/users/login" method="POST" id="mainLoginForm">

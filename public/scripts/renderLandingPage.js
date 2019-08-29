@@ -39,16 +39,14 @@ const renderLandingPage = function(data) {
 </div>
 
   <div id='landingRestaurants'>
-    <div id="map" ></div>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAllv7wgbOCoIcy0VZdFz-um0CgJS7hX4k&callback=initMap">
-    </script>
+    <div class="gmap-container"></div>
     <div id='restaurant-button'>
       <button class="ui large secondary button restaurants-link">RESTAURANTS</button>
     </div>
   </div>
   `;
   $("#rootContainer").append(newTemplateString);
+  initMap();
 
   if (document.cookie.split('=')[2]) {
     const allCookies = document.cookie;
