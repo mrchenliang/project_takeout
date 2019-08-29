@@ -13,10 +13,11 @@
 .ui.raised.segment {
   margin-bottom: 2.5vh;
   border-radius: 5px;
+  transition: .15s;
 }
 
 .ui.raised.segment:hover {
-  box-shadow: 20px 20px 20px -5px rgba(0,0,0,0.75);
+  box-shadow: 8px 8px 12px 0px rgba(0,0,0,0.75);
   transform: scale(1.02);
   border-radius: 5px;
   cursor: pointer;
@@ -28,7 +29,8 @@
 }
 
 #order-card-wrap {
-  max-width: 550px !important;
+  max-width: 540px !important;
+  margin-left: 2.5vh;
 }
 
 .maincontainer {
@@ -38,21 +40,25 @@
 
 .leftcontainer {
   display: flex;
-  overflow: hidden;
+  overflow-y: hidden;
   flex-direction: column;
   height: 100vh;
   will-change: overflow;
   margin-left: 5%;
   width: 42%;
-  overflow: auto;
+  // overflow: auto;
   padding: .5rem;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
 }
 
+.leftcontainer:hover, .leftcontainer:active, .leftcontainer:focus {
+  overflow-y: auto;
+}
+
 .rightcontainer {
   display: flex;
-  overflow: hidden;
+  overflow-y: hidden;
   flex-direction: column;
   height: 100vh;
   will-change: overflow;
@@ -64,6 +70,9 @@
   -ms-overflow-style: none;
 }
 
+.rightcontainer:hover, .rightcontainer:active, .rightcontainer:focus {
+  overflow-y: auto;
+}
 
 .background-color {
 background-color:  #f0e9f5;

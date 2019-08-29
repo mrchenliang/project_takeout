@@ -1,7 +1,3 @@
-#order-progress {
-  margin-right: 100px;
-}
-
 #logo {
   font-weight: 700;
   font-family: 'Comfortaa', cursive;
@@ -19,8 +15,6 @@
 
 #right-menu {
   align-items: center;
-
-
 }
 
 #login {
@@ -41,12 +35,34 @@
   margin-bottom: 120px;
 }
 
+#warningMessage {
+  z-index: -50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#invalidInputMessage {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 93.5vw;
+  margin-left: 6.5vw;
+}
+
+.hidden {
+  display: none;
+}
+
 // .ui.modal:not(.compact) {
 //   width: calc(50% - 50px) !important;
 //   margin-left: 25px !important;
 //   height: calc(35% - 50px) !important;
 //   margin-top: -25px !important;
 //   }
+
 
 
 
