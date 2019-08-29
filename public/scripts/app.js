@@ -205,10 +205,10 @@ $(document).ready(function() {
         password: formArray[1].value
       }
     }).done(function(value) {
+      console.log(value);
       if (value.error == "Error") {
         $(".loginHeader").text("Login failed. Please check your credentials.");
       } else {
-        console.log(value);
         document.cookie = "userId=" + value.id;
         document.cookie = "userName=" + value.name;
         $("#loginModal").modal("hide");
@@ -241,7 +241,6 @@ $(document).ready(function() {
   $("#mainRegisterForm").submit(function() {
     event.preventDefault();
     const formArray = $("#mainRegisterForm").serializeArray();
-    console.log(formArray);
     $.ajax("/users", {
       method: "POST",
       data: {

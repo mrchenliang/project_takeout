@@ -13,9 +13,6 @@ const sendMessage = require("./send_sms");
 module.exports = db => {
   router.get("/", (req, res) => {});
 
-  //login page
-  router.get("/login", (req, res) => {});
-
   //login the user
   router.post("/login", (req, res) => {
     const email = req.body.email;
@@ -28,9 +25,9 @@ module.exports = db => {
         if (result) {
           if (userDetails.password === password) {
             res.send(result);
+          } else {
+            res.send({ error: "Error" });
           }
-        } else {
-          res.send({ error: "Error" });
         }
       })
       .catch(e =>
