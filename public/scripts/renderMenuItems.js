@@ -81,9 +81,6 @@ const renderMenuItems = function(data) {
               }).done((result) => {
                 generateCartPopupDetails();
               })
-
-              // console.log($(this));
-              // console.log($(this).parent());
             });
             total += qty * price;
           });
@@ -208,24 +205,20 @@ const renderMenuItems = function(data) {
 
   // ON CLICK LISTENER AND RENDER ADD TO CART MODAL
   $('.singleMenuItem').on('click', function() {
-    const slct = $(this).attr('data-itemId');
+    const allCookies = document.cookie;
+    const splitCookie = allCookies.split('=');
+    const userId = splitCookie[1][0];
 
+
+    const slct = $(this).attr('data-itemId');
     const title = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h2')[0].innerHTML;
     const description = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('p')[0].innerHTML;
     const itemId = $('div[data-itemId="' + slct + '"').attr('data-itemId');
     const price = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
     const image = $('div[data-itemId="' + slct + '"').children('.menuItemImage').css("background-image");
 
-    // let description = $(this).children('.menuItemDescription').children('p')[0].innerHTML;
-    // let itemId = $(this).attr('data-itemId');
-    // let price = $(this).children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
-    // let image = $(this).children('.menuItemImage').css("background-image");
     let quantity = 1;
 
-    const allCookies = document.cookie;
-    const splitCookie = allCookies.split('=');
-
-    const userId = splitCookie[1][0];
 
     const orderModal =
       `<div class="ui modal" id="orderModal">

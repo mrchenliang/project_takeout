@@ -10,8 +10,13 @@
   float: left;
   margin-top: 30px;
   margin-left: 30px;
-  cursor: pointer;
 }
+
+#logo:hover {
+  cursor: pointer;
+  color: white;
+}
+
 #right-menu {
   align-items: center;
 
