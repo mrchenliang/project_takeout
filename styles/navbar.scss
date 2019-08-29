@@ -39,6 +39,14 @@
   margin-bottom: 120px;
 }
 
+#warningMessage {
+  z-index: -50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 // .ui.modal:not(.compact) {
 //   width: calc(50% - 50px) !important;
 //   margin-left: 25px !important;

@@ -205,98 +205,107 @@ const renderMenuItems = function(data) {
 
   // ON CLICK LISTENER AND RENDER ADD TO CART MODAL
   $('.singleMenuItem').on('click', function() {
-    const allCookies = document.cookie;
-    const splitCookie = allCookies.split('=');
-    const userId = splitCookie[1][0];
+
+    if (document.cookie.split('=')[2]) {
+      const allCookies = document.cookie;
+      const splitCookie = allCookies.split('=');
+      const userId = splitCookie[1][0];
+      const slct = $(this).attr('data-itemId');
+      const title = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h2')[0].innerHTML;
+      const description = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('p')[0].innerHTML;
+      const itemId = $('div[data-itemId="' + slct + '"').attr('data-itemId');
+      const price = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
+      const image = $('div[data-itemId="' + slct + '"').children('.menuItemImage').css("background-image");
+
+      let quantity = 1;
 
 
-    const slct = $(this).attr('data-itemId');
-    const title = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h2')[0].innerHTML;
-    const description = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('p')[0].innerHTML;
-    const itemId = $('div[data-itemId="' + slct + '"').attr('data-itemId');
-    const price = $('div[data-itemId="' + slct + '"').children('.menuItemDescription').children('h3')[0].innerHTML.match(/[\d]+[.][\d]+$/gm);
-    const image = $('div[data-itemId="' + slct + '"').children('.menuItemImage').css("background-image");
-
-    let quantity = 1;
-
-
-    const orderModal =
-      `<div class="ui modal" id="orderModal">
-        <div class="header">
-          <h1>Add to Order</h1>
-        </div>
-        <div class="image content">
-          <div class="modalImage" style='background-image: ${image}'></div>
-        </div>
-        <div class="modalTitle">
-          <h2>${title}</h2>
-          <p>${description}</p>
-          <h3>$ ${price}</h3>
-        </div>
-        <form class="ui form" id="addItemForm-${itemId}" action="/users/${userId}/orders" method="POST">
-          <h4>Notes (optional):</h4>
-          <input type="text" name="notes" placeholder="Make it blessed.">
-          <div class="quantityInput field">
-            <button class="positive ui button" id="addQuantity">Add</button>
-            <button class="negative ui button" id="removeQuantity">Remove</button>
-            <input type="text" name="quantity" id="quantity" readonly value=${quantity} style="border:none">
-            <p>x $${price}</p>
-            <p id=totalPrice>Total: $${quantity*price}</p>
-            <input type=text name="menu_item_id" style="display: none" value="${itemId}">
+      const orderModal =
+        `<div class="ui modal" id="orderModal">
+          <div class="header">
+            <h1>Add to Order</h1>
           </div>
-          <div class="actions">
-            <div class="ui large buttons">
-              <button class="ui button" id="addToOrder">Add to Order</button>
+          <div class="image content">
+            <div class="modalImage" style='background-image: ${image}'></div>
+          </div>
+          <div class="modalTitle">
+            <h2>${title}</h2>
+            <p>${description}</p>
+            <h3>$ ${price}</h3>
+          </div>
+          <form class="ui form" id="addItemForm-${itemId}" action="/users/${userId}/orders" method="POST">
+            <h4>Notes (optional):</h4>
+            <input type="text" name="notes" placeholder="Make it blessed.">
+            <div class="quantityInput field">
+              <button class="positive ui button" id="addQuantity">Add</button>
+              <button class="negative ui button" id="removeQuantity">Remove</button>
+              <input type="text" name="quantity" id="quantity" readonly value=${quantity} style="border:none">
+              <p>x $${price}</p>
+              <p id=totalPrice>Total: $${quantity*price}</p>
+              <input type=text name="menu_item_id" style="display: none" value="${itemId}">
             </div>
-          </div>
-        </form>
-      </div>`;
+            <div class="actions">
+              <div class="ui large buttons">
+                <button class="ui button" id="addToOrder">Add to Order</button>
+              </div>
+            </div>
+          </form>
+        </div>`;
 
-    $("#rootContainer").append(orderModal);
+      $("#rootContainer").append(orderModal);
 
-    $('#addToOrder').on('click',() => {
-      $('.cartDetails').removeClass('showCart') });
+      $('#addToOrder').on('click',() => {
+        $('.cartDetails').removeClass('showCart') });
 
-    $('#orderModal #addQuantity').on('click', function() {
-      event.preventDefault();
-      quantity++;
-      let quantityElement = $('#orderModal #quantity');
-      quantityElement.prop('readonly',false);
-      quantityElement.val(`${quantity}`);
-      quantityElement.prop('readonly',true);
-      $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
-    });
-
-    $('#orderModal #removeQuantity').on('click', function() {
-      event.preventDefault();
-      if (quantity > 1) {
-        quantity--;
+      $('#orderModal #addQuantity').on('click', function() {
+        event.preventDefault();
+        quantity++;
         let quantityElement = $('#orderModal #quantity');
         quantityElement.prop('readonly',false);
         quantityElement.val(`${quantity}`);
         quantityElement.prop('readonly',true);
         $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
-      };
-    });
+      });
 
-    $(`#addItemForm-${itemId}`).on('submit', function() {
+      $('#orderModal #removeQuantity').on('click', function() {
+        event.preventDefault();
+        if (quantity > 1) {
+          quantity--;
+          let quantityElement = $('#orderModal #quantity');
+          quantityElement.prop('readonly',false);
+          quantityElement.val(`${quantity}`);
+          quantityElement.prop('readonly',true);
+          $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
+        };
+      });
 
-      event.preventDefault();
-      const formData = $(this).serialize();
+      $(`#addItemForm-${itemId}`).on('submit', function() {
 
-      $.ajax({
-        method : 'POST',
-        url: $(this).attr('action'),
-        data : formData
-      }).done(function(value) {
-        if (value.error == 'Error') {
-        } else {
-          // console.log(value);
-        }
-        $('.ui.modal').modal('hide');
-      })
-    });
+        event.preventDefault();
+        const formData = $(this).serialize();
 
-    $('#orderModal').modal('show');
+        $.ajax({
+          method : 'POST',
+          url: $(this).attr('action'),
+          data : formData
+        }).done(function(value) {
+          if (value.error == 'Error') {
+          } else {
+            // console.log(value);
+          }
+          $('.ui.modal').modal('hide');
+        })
+      });
+
+      $('#orderModal').modal('show');
+
+    } else {
+        $('#warningMessage').css('z-index', '100');
+      setTimeout(() => {
+        $('#warningMessage').css('z-index', '-100');
+      }, 1500);
+
+    }
+
   });
 };
