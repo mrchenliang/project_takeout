@@ -6,9 +6,8 @@ let info =
 <h1>Order ID: ${data[0].order_id}</h1>`;
 
 let total = 0;
-let orderTotal = 0;
 data.forEach(element => {
-  orderTotal = element.price * element.quantity / 100;
+  let orderTotal=element.price * element.quantity / 100;
   total += orderTotal;
 })
 

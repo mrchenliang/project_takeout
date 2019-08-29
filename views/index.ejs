@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/scripts/renderClientsLandingPage.js"></script>
     <script type="text/javascript" src="/scripts/renderClientsOrdersPage.js"></script>
     <script type="text/javascript" src="/scripts/ordersDropdown.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
   </head>
 
 
@@ -52,19 +53,17 @@
       <div class="ui modal" id='orderHistoryModal'>
           <i class="close icon"></i>
           <div class="header">
-            Your orders
+            Your Previous Orders
           </div>
           <div class="content" id='contentContainer'>
             <div class="ui medium content scrolling" id='listOfOrders'>
             </div>
             <div class="description content scrolling" id='singleOrderDetails'>
-              This is the description for orders
             </div>
           </div>
           <div class="actions">
-            <div class="ui positive right labeled icon button">
+            <div class="ui positive right labeled icon button" id='orderHistoryExit'>
               EXIT
-              <i class="checkmark icon"></i>
             </div>
           </div>
 

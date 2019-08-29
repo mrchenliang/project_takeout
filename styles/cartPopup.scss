@@ -4,7 +4,7 @@
   position: fixed;
   bottom: 10px;
   right: 25px;
-  background-color: blue;
+  background-color: #1b1c1d;
   color: white;
   text-align: center;
   z-index: 50;
@@ -13,7 +13,7 @@
 
 .cartPopup:hover {
   background-color: white;
-  color: blue;
+  color: #1b1c1d;
   cursor: pointer;
 }
 
@@ -44,7 +44,8 @@
 }
 
 .cartDetailsTitle {
-  color: white;
+  color: black;
+  font-size: 1.5em;
   text-align: center;
   height: 1.5em;
 }
@@ -61,7 +62,7 @@
 }
 
 #submitOrder:hover {
-  background-color: blue;
+  background-color: #1b1c1d;
   color: white;
   cursor: pointer;
 }
