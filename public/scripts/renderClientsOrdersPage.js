@@ -7,10 +7,10 @@ const renderClientsOrdersPage = function(data) {
 
   data.forEach(element => {
     const newOrder = `
-    <div class = "order-card-wrap" data-orderID='${element.order_id}'>
+    <div class = "order-card-wrap" id="order-card-wrap" data-orderID='${element.order_id}'>
     <div class="ui raised very padded text container segment status-${
       element.order_status
-    }">
+    }" id="order-card-wrap">
   <h2 class="ui header" >Order ID: ${element.order_id} </h2>
   <div class='orders-usersID'>
   Customer Name: ${element.name}
