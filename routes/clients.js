@@ -106,11 +106,12 @@ module.exports = db => {
       .then(result => {
         const clientDetails = result;
         if (result) {
+          console.log(result, clientPassword);
           if (clientDetails.password === clientPassword) {
             res.send(result);
+          } else {
+            res.send({ error: "Error" });
           }
-        } else {
-          res.send({ error: "Error" });
         }
       })
       .catch(e =>
