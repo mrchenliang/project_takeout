@@ -63,7 +63,20 @@ const renderClientsOrdersPage = function(data) {
     const queryString = `/clients/${sessionStorage.getItem(
       "restId"
     )}/orders/${orderId}`;
-    if (Number.isInteger(Number($(`#waittime-${orderId}`).val()))) {
+    if (!$(`#waittime-${orderId}`).val()) {
+      waitTime = "";
+      $.ajax({
+        url: queryString,
+        type: "POST",
+        data: { est_time: waitTime }
+      }).done(value => {
+        $.ajax(`/clients/${sessionStorage.getItem("restId")}/orders`, {
+          method: "GET"
+        }).done(function(value) {
+          renderClientsOrdersPage(value);
+        });
+      });
+    } else if (Number.isInteger(Number($(`#waittime-${orderId}`).val()))) {
       waitTime = $(`#waittime-${orderId}`).val();
       $.ajax({
         url: queryString,
