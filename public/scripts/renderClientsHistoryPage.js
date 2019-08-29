@@ -35,7 +35,7 @@ const renderClientsHistoryPage = function(data) {
 
   $(".order-card-wrap-history").on("click", function() {
     const orderId = $(this).data().orderid;
-    const queryString = `/clients/2/history/${orderId}`;
+    const queryString = `/clients/${sessionStorage.getItem('restId')}/history/${orderId}`;
 
     $.ajax(queryString, { method: "GET" }).done(function(value) {
       console.log(value);
@@ -44,7 +44,7 @@ const renderClientsHistoryPage = function(data) {
   });
 
   $('.refresh-history').on('click', () => {
-    $.ajax('/clients/2/history', { method: 'GET' })
+    $.ajax(`/clients/${sessionStorage.getItem('restId')}/history`, { method: 'GET' })
       .done(function(value) {
       renderClientsHistoryPage(value);
       });

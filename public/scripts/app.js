@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 // ON CLICK LISTENER AND RENDER ORDERS PAGE
   $('.orders-list').on('click', () => {
-    $.ajax('/clients/2/orders', { method: 'GET' })
+    $.ajax(`/clients/${sessionStorage.getItem('restId')}/orders`, { method: 'GET' })
       .done(function(value) {
       renderClientsOrdersPage(value);
       });
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 // ON CLICK LISTENER AND RENDER ORDERS HISTORY PAGE
   $('.orders-history').on('click', () => {
-    $.ajax('/clients/2/history', { method: 'GET' })
+    $.ajax(`/clients/${sessionStorage.getItem('restId')}/history`, { method: 'GET' })
       .done(function(value) {
       renderClientsHistoryPage(value);
       });
@@ -78,8 +78,8 @@ $(document).ready(function() {
       if (value.error == 'Error') {
         $('.loginHeader').text('Login failed. Please check your credentials.');
       } else {
-        document.cookie = 'restId=' + value.id;
-        document.cookie = 'restName=' + value.name;
+        sessionStorage.setItem('restId', value.id);
+        sessionStorage.setItem('restName', value.name);
         $('#clientLoginModal').modal('hide');
         $('#client-login').css('display', 'none');
         $('#client-logout').css('display', 'inline-block');
@@ -92,8 +92,12 @@ $(document).ready(function() {
     $('#client-login').css('display', 'inline-block');
     $('#client-logout').css('display', 'none');
     $('#client-loginlogout').text('');
-    document.cookie = 'restId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-    document.cookie = 'restName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    sessionStorage.removeItem('restId');
+    sessionStorage.removeItem('restName');
+    $.ajax('/clients', { method: 'GET' })
+    .done(function(value) {
+    renderClientsLandingPage(value);
+    });
   });
 
 

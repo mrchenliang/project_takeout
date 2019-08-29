@@ -48,10 +48,9 @@ const renderClientsOrdersPage = function(data) {
 
   $(".order-card-wrap").on("click", function() {
     const orderId = $(this).data().orderid;
-    const queryString = `/clients/2/orders/${orderId}`;
+    const queryString = `/clients/${sessionStorage.getItem('restId')}/orders/${orderId}`;
 
     $.ajax(queryString, { method: "GET" }).done(function(value) {
-      console.log(value);
       renderOrdersDetail(value);
     });
   });
@@ -59,21 +58,21 @@ const renderClientsOrdersPage = function(data) {
   $(".confirm-completed").on("submit", function(evt) {
     evt.preventDefault();
     const orderId = $(this).data().id;
-    const queryString = `/clients/2/orders/${orderId}`;
+    const queryString = `/clients/${sessionStorage.getItem('restId')}/orders/${orderId}`;
     const waitTime = $(`#waittime-${orderId}`).val();
     $.ajax({
       url: queryString,
       type: "POST",
       data: { est_time: waitTime }
     }).done(value => {
-      $.ajax("/clients/2/orders", { method: "GET" }).done(function(value) {
+      $.ajax(`/clients/${sessionStorage.getItem('restId')}/orders`, { method: "GET" }).done(function(value) {
         renderClientsOrdersPage(value);
       });
     });
   });
 
   $(".refresh").on("click", () => {
-    $.ajax("/clients/2/orders", { method: "GET" }).done(function(value) {
+    $.ajax(`/clients/${sessionStorage.getItem('restId')}/orders`, { method: "GET" }).done(function(value) {
       renderClientsOrdersPage(value);
     });
   });
