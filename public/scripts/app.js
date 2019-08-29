@@ -146,7 +146,9 @@ $(document).ready(function() {
           "You're logged in as:  " + value.name + ". Click to view your orders."
         );
         $("#order-progress").on("click", () => {
-          console.log("clicked");
+          generateAllOrders();
+          $('#orderHistoryModal')
+            .modal('show');
         });
       }
     });
@@ -188,7 +190,10 @@ $(document).ready(function() {
         ". Click to view your orders."
     );
     $("#order-progress").on("click", () => {
-      console.log("clicked");
+      generateAllOrders();
+      $('#orderHistoryModal')
+        .modal('show')
+      ;
     });
     $("#registerModal").modal("hide");
   });
