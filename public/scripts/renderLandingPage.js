@@ -57,7 +57,7 @@ const renderLandingPage = function(data) {
     $('#login').css('display', 'none');
     $('#signup').css('display', 'none');
     $('#logout').css('display', 'inline-block');
-    $('#order-progress').text("You're logged in as:  " + userName + '   >>>  VIEW ORDERS');
+    $('#order-progress').text("You're logged in as:  " + userName + '   . Click to view your orders.');
     $('#order-progress').on('click', () => {
       generateAllOrders();
       $('#orderHistoryModal')

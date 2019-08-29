@@ -1,5 +1,8 @@
 const renderClientsLandingPage = function(data) {
   $('#clients-landing').empty();
+  $('#clientsLeftContainer').empty();
+  $('#clientsRightContainer').empty();
+
 
   const newTemplateString = `
   <div id='clientsLanding'>

@@ -19,8 +19,41 @@
   height: 100%;
   display: inline-block;
   overflow: auto;
+  padding: 2em;
 }
 
 .orderTitle {
   border: 1px solid gray;
+  transition-duration: .4s;
+  padding: 12px;
+  margin-bottom: .5em;
+}
+
+.orderTitle:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+#orderHistoryExit {
+  background-color: #1b1c1d;
+  transition: .35s;
+}
+
+#orderHistoryExit:hover {
+  background-color: #2d2f30;
+}
+
+#orderHistoryExit1 {
+  background-color: #1b1c1d;
+  transition: .35s;
+  float: right;
+}
+
+#orderHistoryExit1:hover {
+  background-color: #2d2f30;
+}
+
+#orderHistoryNotesP {
+  color: gray;
+  font-size: 10px;
 }
