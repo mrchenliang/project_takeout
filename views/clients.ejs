@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
 
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <!--ALL SCRIPTS-->
@@ -18,6 +19,8 @@
     <script type="text/javascript" src="/scripts/renderClientsLandingPage.js"></script>
     <script type="text/javascript" src="/scripts/renderOrdersDetail.js"></script>
     <script type="text/javascript" src="/scripts/renderClientsOrdersPage.js"></script>
+    <script type="text/javascript" src="/scripts/renderClientsHistoryPage.js"></script>
+    <script type="text/javascript" src="/scripts/renderHistoryDetail.js"></script>
   </head>
 
 
@@ -28,5 +31,13 @@
     <div class="leftcontainer" id='clientsLeftContainer'></div>
     <div class="rightcontainer" id='clientsRightContainer'></div>
     </div>
+    <div class="ui basic modal" id='clientLoginModal'>
+        <h2 class='loginHeader'>Please Restaurant Login Information</h2>
+        <form action="/clients/login" method="POST" id="clientLoginForm">
+          <input type="text" name='clientId' placeholder='ID'>
+          <input type="password" name='clientPassword' placeholder='password'>
+          <button>Submit</button>
+          <span class='exitCL'>EXIT</span>
+        </form>
   </body>
 </html>

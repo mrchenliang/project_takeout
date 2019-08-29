@@ -68,7 +68,7 @@ const generateSingleOrder = function (orderId) {
       sum += price / 100;
       const tempStringDet = `
         <tr>
-          <td>${name}<p>${notes}</p></td>
+          <td>${name}<p id='orderHistoryNotesP'>${notes}</p></td>
           <td>${qty}</td>
           <td>$${price / 100}</td>
         </tr>
@@ -76,7 +76,7 @@ const generateSingleOrder = function (orderId) {
       $('.summBodyHist').append(tempStringDet);
 
     });
-    const priceString = `Total of your order is: $${sum.toFixed(2)}`;
+    const priceString = `Total of your order was: $${sum.toFixed(2)}`;
     $('#totalOrderHistPrice').text(priceString);
   });
 };
