@@ -71,26 +71,29 @@ $(document).ready(function() {
   $("#clientLoginForm").submit(function() {
     event.preventDefault();
     const formArray = $('#clientLoginForm').serializeArray();
-    $.ajax('/users/login', { method : 'POST', data : {
-      email: formArray[0].value,
-      password: formArray[1].value,
-    } }).done(function(value) {
+    $.ajax('/clients/login', { method : 'POST', data : {
+      phone: formArray[0].value,
+      clientPassword: formArray[1].value,
+    }}).done(function(value) {
       if (value.error == 'Error') {
         $('.loginHeader').text('Login failed. Please check your credentials.');
       } else {
-        console.log(value);
-        document.cookie = 'userId=' + value.id;
-        document.cookie = 'userName=' + value.name;
-        $('#loginModal').modal('hide');
-        $('#login').css('display', 'none');
-        $('#signup').css('display', 'none');
-        $('#logout').css('display', 'inline-block');
-        $('#order-progress').text("You're logged in as:  " + value.name + '   >>>  VIEW ORDERS');
-        $('#order-progress').on('click', () => {
-          console.log('clicked');
-        });
+        document.cookie = 'restId=' + value.id;
+        document.cookie = 'restName=' + value.name;
+        $('#clientLoginModal').modal('hide');
+        $('#client-login').css('display', 'none');
+        $('#client-logout').css('display', 'inline-block');
+        $('#client-loginlogout').text(value.name);
       }
     })
+  });
+
+  $('#client-logout').on('click', () => {
+    $('#login').css('display', 'inline-block');
+    $('#client-logout').css('display', 'none');
+    $('#order-progress').text('');
+    document.cookie = 'restId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'restName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
   });
 
 

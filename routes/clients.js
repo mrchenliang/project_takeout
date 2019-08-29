@@ -94,17 +94,19 @@ module.exports = db => {
       );
   });
 
+  //login page
+  router.get("/login", (req, res) => {});
+
   //login the client
   router.post("/login", (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
+    const phone = req.body.phone;
+    const clientPassword = req.body.clientPassword;
     helpers
-      .getUserByEmail(db, email)
+      .getClientByPhone(db, phone)
       .then(result => {
-        const userDetails = result;
+        const clientDetails = result;
         if (result) {
-          if (userDetails.password === password) {
+          if (clientDetails.password === clientPassword) {
             res.send(result);
           }
         } else {

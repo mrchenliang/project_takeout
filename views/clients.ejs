@@ -32,13 +32,12 @@
     <div class="rightcontainer" id='clientsRightContainer'></div>
     </div>
     <div class="ui basic modal" id='clientLoginModal'>
-        <h2 class='loginHeader'>Please Enter Your Login Information</h2>
-        <form action="/users/login" method="POST" id="clientLoginForm">
-          <input type="text" name='email' placeholder='email'>
-          <input type="password" name='password' placeholder='password'>
+        <h2 class='loginHeader'>Please Restaurant Login Information</h2>
+        <form action="/clients/login" method="POST" id="clientLoginForm">
+          <input type="text" name='phone' placeholder='phone number'>
+          <input type="password" name='clientPassword' placeholder='password'>
           <button>Submit</button>
           <span class='exitCL'>EXIT</span>
         </form>
-    </div>
   </body>
 </html>
