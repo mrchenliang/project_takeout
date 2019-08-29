@@ -39,65 +39,12 @@ const renderLandingPage = function(data) {
 </div>
 
   <div id='landingRestaurants'>
-  <div id='restaurant-selector'>
-  <div class="ui people shape">
-  <div class="sides">
-    <div class="active side">
-      <div class="ui card">
-        <div class="image">
-          <img src="/images/avatar/large/steve.jpg">
-        </div>
-        <div class="content">
-          <div class="header">Steve Jobes</div>
-          <div class="meta">
-            <a>Acquaintances</a>
-          </div>
-          <div class="description">
-            Steve Jobes is a fictional character designed to resemble someone familiar to readers.
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            Joined in 2014
-          </span>
-          <span>
-            <i class="user icon"></i>
-            151 Friends
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="side">
-      <div class="ui card">
-        <div class="image">
-          <img src="/images/avatar/large/stevie.jpg">
-        </div>
-        <div class="content">
-          <a class="header">Stevie Feliciano</a>
-          <div class="meta">
-            <span class="date">Joined in 2014</span>
-          </div>
-          <div class="description">
-            Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
-          </div>
-        </div>
-        <div class="extra content">
-          <a>
-            <i class="user icon"></i>
-            22 Friends
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  </div>
-  <div class="ui ignored icon direction buttons" id="restaurant-selector-button-container">
-      <div class="ui button" data-animation="flip" data-direction="left" title="Flip Left"><i class="left long arrow icon"></i></div>
-      <div class="ui icon button" data-animation="flip" data-direction="right" title="Flip Right"><i class="right long arrow icon"></i></div>
-  </div>
+    <div id="map" ></div>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAllv7wgbOCoIcy0VZdFz-um0CgJS7hX4k&callback=initMap">
+    </script>
     <div id='restaurant-button'>
-      <button class="ui secondary button restaurants-link">RESTAURANTS</button>
+      <button class="ui large secondary button restaurants-link">RESTAURANTS</button>
     </div>
   </div>
   `;
@@ -124,5 +71,13 @@ const renderLandingPage = function(data) {
       .done(function(value) {
         renderRestaurantsPage(value);
       });
+  });
+
+  $('#flip-left').on('click', () => {
+    $('.shape').shape('flip left');
+  });
+
+  $('#flip-right').on('click', () => {
+    $('.shape').shape('flip right');
   });
 };
