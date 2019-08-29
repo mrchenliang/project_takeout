@@ -66,7 +66,7 @@ const generateSingleOrder = function (orderId) {
       const qty = element.quantity;
       const price = element.price;
       const notes = element.notes;
-      sum += price / 100;
+      sum += price * qty / 100;
       const tempStringDet = `
         <tr>
           <td>${name}<p id='orderHistoryNotesP'>${notes}</p></td>
