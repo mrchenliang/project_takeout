@@ -89,9 +89,9 @@ $(document).ready(function() {
   });
 
   $('#client-logout').on('click', () => {
-    $('#login').css('display', 'inline-block');
+    $('#client-login').css('display', 'inline-block');
     $('#client-logout').css('display', 'none');
-    $('#order-progress').text('');
+    $('#client-loginlogout').text('');
     document.cookie = 'restId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'restName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
   });
