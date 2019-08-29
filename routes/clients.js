@@ -99,10 +99,10 @@ module.exports = db => {
 
   //login the client
   router.post("/login", (req, res) => {
-    const phone = req.body.phone;
+    const clientId = req.body.clientId;
     const clientPassword = req.body.clientPassword;
     helpers
-      .getClientByPhone(db, phone)
+      .getClientByID(db, clientId)
       .then(result => {
         const clientDetails = result;
         if (result) {

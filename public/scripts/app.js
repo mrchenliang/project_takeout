@@ -75,7 +75,7 @@ $(document).ready(function() {
     $.ajax("/clients/login", {
       method: "POST",
       data: {
-        phone: formArray[0].value,
+        clientId: formArray[0].value,
         clientPassword: formArray[1].value
       }
     }).done(function(value) {
