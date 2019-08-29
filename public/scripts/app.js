@@ -126,7 +126,7 @@ $(document).ready(function() {
         $('#login').css('display', 'none');
         $('#signup').css('display', 'none');
         $('#logout').css('display', 'inline-block');
-        $('#order-progress').text("You're logged in as:  " + value.name + '   >>>  VIEW ORDERS');
+        $('#order-progress').text("You're logged in as:  " + value.name + '. Click to view your orders.');
         $('#order-progress').on('click', () => {
           console.log('clicked');
         });
@@ -161,7 +161,7 @@ $(document).ready(function() {
     $('#login').css('display', 'none');
     $('#signup').css('display', 'none');
     $('#logout').css('display', 'inline-block');
-    $('#order-progress').text("You're logged in as:  " + formArray[0].value + '   >>>  VIEW ORDERS');
+    $('#order-progress').text("You're logged in as:  " + formArray[0].value + '. Click to view your orders.');
     $('#order-progress').on('click', () => {
       console.log('clicked');
     });

@@ -63,7 +63,7 @@ const renderMenuItems = function(data) {
               <tr class='entry${count}'>
                 <td>${name}<i class="window close outline icon closeIcon" data-icon="${count}"></i><p>${notes}</p></td>
                 <td>${qty}</td>
-                <td>$${price / 100}</td>
+                <td>$${qty * price / 100}</td>
               </tr>
             `;
             $('.summBody').append(tempString);
@@ -73,7 +73,7 @@ const renderMenuItems = function(data) {
 
               const oldVal = $('#theTotal').text();
               console.log(oldVal);
-              $('#theTotal').text((oldVal - ((price) / 100)).toFixed(2));
+              $('#theTotal').text((oldVal - ((price * qty) / 100)).toFixed(2));
               $.ajax({
                 method : 'DELETE',
                 url: '/users/' + splitCookie[1][0] + '/orders',
@@ -85,7 +85,7 @@ const renderMenuItems = function(data) {
               // console.log($(this));
               // console.log($(this).parent());
             });
-            total += price;
+            total += qty * price;
           });
           $('.cartTotals').empty();
           const tempStringTotals = `
@@ -154,12 +154,19 @@ const renderMenuItems = function(data) {
 
   const generateMenuItems = (menuItems) => {
 
+    let description;
+
     menuItems.forEach(element => {
+      if (element.description == null) {
+        description = '';
+      } else {
+        description = element.description;
+      }
       let menuItemTemplateString = `
       <div class='singleMenuItem' data-itemId="${element.id}">
         <div class='menuItemDescription'>
           <h2>${element.name}</h2>
-          <p>${element.description}</p>
+          <p>${description}</p>
           <h3>Price: $${element.price / 100}</h3>
         </div>
         <div class='menuItemImage' style='background-image: url("${element.image_url}")'>

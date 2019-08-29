@@ -23,4 +23,10 @@
 
 .orderTitle {
   border: 1px solid gray;
+  transition-duration: .4s;
+}
+
+.orderTitle:hover {
+  background-color: lightgray;
+  cursor: pointer;
 }
