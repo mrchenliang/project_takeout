@@ -25,7 +25,7 @@ function initMap() {
   });
 
   let geocoder = new google.maps.Geocoder();
-  let markers = [];
+  let infowindow = null;
 
   if (geocoder) {
     $.ajax('/restaurants', { method: 'GET' })
@@ -37,7 +37,7 @@ function initMap() {
         geocoder.geocode( { 'address': restaurant.address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-              var infowindow = new google.maps.InfoWindow({
+              infowindow = new google.maps.InfoWindow({
                 content: address,
                 size: new google.maps.Size(150,50)
               });
@@ -54,7 +54,9 @@ function initMap() {
               });
 
               google.maps.event.addListener(marker, 'click', function() {
-
+                if (infowindow) {
+                  infowindow.close();
+                }
                 infowindow.open(map,marker);
               });
             }
