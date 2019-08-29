@@ -59,7 +59,9 @@ const renderClientsOrdersPage = function(data) {
     evt.preventDefault();
     const orderId = $(this).data().id;
     const queryString = `/clients/${sessionStorage.getItem('restId')}/orders/${orderId}`;
-    const waitTime = $(`#waittime-${orderId}`).val();
+    const waitTime = (Number.isInteger($(`#waittime-${orderId}`).val())) ?
+    $(`#waittime-${orderId}`).val() : '';
+    console.log(waitTime);
     $.ajax({
       url: queryString,
       type: "POST",

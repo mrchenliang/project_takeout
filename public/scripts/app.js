@@ -1,4 +1,16 @@
 $(document).ready(function() {
+
+  if (sessionStorage.getItem('restId')) {
+    $("#client-login").css("display", "none");
+    $("#client-logout").css("display", "inline-block");
+    $("#client-loginlogout").text(sessionStorage.getItem('restName'));
+    $.ajax(`/clients/${sessionStorage.getItem("restId")}/orders`, {
+      method: "GET"
+    }).done(function(value) {
+      renderClientsOrdersPage(value);
+    });
+  };
+
   // INITIAL LANDING OF THE INDEX PAGE
   $.ajax("/restaurants", { method: "GET" }).done(function(value) {
     renderLandingPage(value);
@@ -82,6 +94,11 @@ $(document).ready(function() {
         $("#client-login").css("display", "none");
         $("#client-logout").css("display", "inline-block");
         $("#client-loginlogout").text(sessionStorage.getItem('restName'));
+        $.ajax(`/clients/${sessionStorage.getItem("restId")}/orders`, {
+          method: "GET"
+        }).done(function(value) {
+          renderClientsOrdersPage(value);
+        });
       }
     });
   });
