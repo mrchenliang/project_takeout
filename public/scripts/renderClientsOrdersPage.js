@@ -48,7 +48,9 @@ const renderClientsOrdersPage = function(data) {
 
   $(".order-card-wrap").on("click", function() {
     const orderId = $(this).data().orderid;
-    const queryString = `/clients/${sessionStorage.getItem('restId')}/orders/${orderId}`;
+    const queryString = `/clients/${sessionStorage.getItem(
+      "restId"
+    )}/orders/${orderId}`;
 
     $.ajax(queryString, { method: "GET" }).done(function(value) {
       renderOrdersDetail(value);
@@ -58,23 +60,31 @@ const renderClientsOrdersPage = function(data) {
   $(".confirm-completed").on("submit", function(evt) {
     evt.preventDefault();
     const orderId = $(this).data().id;
-    const queryString = `/clients/${sessionStorage.getItem('restId')}/orders/${orderId}`;
-    const waitTime = (Number.isInteger($(`#waittime-${orderId}`).val())) ?
-    $(`#waittime-${orderId}`).val() : '';
-    console.log(waitTime);
-    $.ajax({
-      url: queryString,
-      type: "POST",
-      data: { est_time: waitTime }
-    }).done(value => {
-      $.ajax(`/clients/${sessionStorage.getItem('restId')}/orders`, { method: "GET" }).done(function(value) {
-        renderClientsOrdersPage(value);
+    const queryString = `/clients/${sessionStorage.getItem(
+      "restId"
+    )}/orders/${orderId}`;
+    if (Number.isInteger(Number($(`#waittime-${orderId}`).val()))) {
+      waitTime = $(`#waittime-${orderId}`).val();
+      $.ajax({
+        url: queryString,
+        type: "POST",
+        data: { est_time: waitTime }
+      }).done(value => {
+        $.ajax(`/clients/${sessionStorage.getItem("restId")}/orders`, {
+          method: "GET"
+        }).done(function(value) {
+          renderClientsOrdersPage(value);
+        });
       });
-    });
+    } else {
+      alert("Error: Not Valid Entry!");
+    }
   });
 
   $(".refresh").on("click", () => {
-    $.ajax(`/clients/${sessionStorage.getItem('restId')}/orders`, { method: "GET" }).done(function(value) {
+    $.ajax(`/clients/${sessionStorage.getItem("restId")}/orders`, {
+      method: "GET"
+    }).done(function(value) {
       renderClientsOrdersPage(value);
     });
   });
