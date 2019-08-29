@@ -1,8 +1,18 @@
-#client-logout {
+
+.clientsloginlogout {
   position: fixed;
   bottom: 0;
+  margin-bottom: 2em;
+  display: flex;
+  justify-items: space-around;
+  flex-direction: column;
 }
+
 
 .ui.left {
   width: 10%;
+}
+
+#client-logout {
+  display: none;
 }

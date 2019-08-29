@@ -5,15 +5,28 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
-const helpers = require('../lib/dbHelpers.js');
-const sendMessage = require('./send_sms');
+const express = require("express");
+const router = express.Router();
+const helpers = require("../lib/dbHelpers.js");
+const sendMessage = require("./send_sms");
 
-module.exports = (db) => {
-  //get all orders from a specific restaurant
+module.exports = db => {
+  //get all current orders from a specific restaurant
   router.get("/:client_id/orders", (req, res) => {
-    helpers.getAllOrders(db, req.params.client_id)
+    helpers
+      .getAllOrders(db, req.params.client_id)
+      .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //get all orders from a specific restaurant
+  router.get("/:client_id/history", (req, res) => {
+    helpers
+      .getAllHistoryOrders(db, req.params.client_id)
       .then(result => res.send(result))
       .catch(e =>
         setImmediate(() => {
@@ -24,7 +37,20 @@ module.exports = (db) => {
 
   //get order details from specific restaurant and specific order
   router.get("/:client_id/orders/:order_id", (req, res) => {
-    helpers.getOrderDetailsById(db, req.params.client_id, req.params.order_id)
+    helpers
+      .getOrderDetailsById(db, req.params.client_id, req.params.order_id)
+      .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //get order details from specific restaurant and specific order
+  router.get("/:client_id/history/:order_id", (req, res) => {
+    helpers
+      .getOrderDetailsById(db, req.params.client_id, req.params.order_id)
       .then(result => res.send(result))
       .catch(e =>
         setImmediate(() => {
@@ -38,22 +64,56 @@ module.exports = (db) => {
     const order_id = req.params.order_id;
     const est_time = req.body.est_time;
 
-    helpers.markOrder(db, order_id, est_time)
+    helpers
+      .markOrder(db, order_id, est_time)
       .then(result => {
         const markOrderResult = result[0];
         const user_id = result[0].user_id;
-        helpers.getUserById(db, user_id)
-          .then(result => {
-            const phone = result.phone;
-            //console.log(markOrderResult);
-            if (markOrderResult.status === "confirmed") {
-              sendMessage(`Your order has been confirmed and is being prepared. Estimated wait time is ${markOrderResult.wait_time} minutes. Hold tight!`, result.phone);
-            } else if (markOrderResult.status === "completed") {
-              sendMessage("Your order is ready for pick up. Enjoy!", result.phone);
-            }
-            //send sms message
-            res.send(markOrderResult);
-          })
+        helpers.getUserById(db, user_id).then(result => {
+          const phone = result.phone;
+          //console.log(markOrderResult);
+          if (markOrderResult.status === "confirmed") {
+            sendMessage(
+              `Your order has been confirmed and is being prepared. Estimated wait time is ${markOrderResult.wait_time} minutes. Hold tight!`,
+              result.phone
+            );
+          } else if (markOrderResult.status === "completed") {
+            sendMessage(
+              "Your order is ready for pick up. Enjoy!",
+              result.phone
+            );
+          }
+          //send sms message
+          res.send(markOrderResult);
+        });
+      })
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //login page
+  router.get("/login", (req, res) => {});
+
+  //login the client
+  router.post("/login", (req, res) => {
+    const clientId = req.body.clientId;
+    const clientPassword = req.body.clientPassword;
+    console.log(clientId);
+    helpers
+      .getClientByID(db, clientId)
+      .then(result => {
+        const clientDetails = result;
+        if (result) {
+          console.log(result, clientPassword);
+          if (clientDetails.password === clientPassword) {
+            res.send(result);
+          } else {
+            res.send({ error: "Error" });
+          }
+        }
       })
       .catch(e =>
         setImmediate(() => {
@@ -64,4 +124,3 @@ module.exports = (db) => {
 
   return router;
 };
-
