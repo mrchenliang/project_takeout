@@ -206,15 +206,8 @@ $(document).ready(function() {
     $("#registerModal").modal("hide");
   });
 
-  $('#orderHistoryExit1').on('click', () => {
-    const allCookies = document.cookie;
-    const splitCookie = allCookies.split('=');
-    $.ajax({
-      method : 'GET',
-      url: '/users/' + splitCookie[1][0] + '/allOrders/stats',
-    }).done(function(value) {
-      console.log(value);
-      drawChart(value);
-    });
-  })
+  $('#orderHistoryExit1').click(function() {
+    drawChart();
+  });
+
 });
