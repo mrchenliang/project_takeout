@@ -39,7 +39,10 @@ const renderLandingPage = function(data) {
 </div>
 
   <div id='landingRestaurants'>
-    <div class="gmap-container"></div>
+    <div id="map"></div>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAllv7wgbOCoIcy0VZdFz-um0CgJS7hX4k&callback=initMap">
+    </script>
     <div id='restaurant-button'>
       <button class="ui large secondary button restaurants-link">RESTAURANTS</button>
     </div>

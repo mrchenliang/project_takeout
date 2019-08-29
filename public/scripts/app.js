@@ -10,6 +10,7 @@ function initMap() {
 }
 
 $(document).ready(function() {
+  // initMap();
 
   // INITIAL LANDING OF THE INDEX PAGE
   $.ajax('/restaurants', { method: 'GET' })
