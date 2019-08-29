@@ -11,8 +11,9 @@ const generateAllOrders = function() {
     value.forEach(element => {
       const orderTempString = `
       <div class='orderTitle' data-orderHistoryId=${element.order_id}>
-        <h3>ORDER ID : ${element.order_id}</h3>
-        <p>TOTAL : $${element.total / 100}. \u00A0\u00A0\u00A0\u00A0 Order status : ${element.status}</p>
+        <h3>ORDER ID: ${element.order_id}</h3>
+        <p>TOTAL: $${(element.total / 100).toFixed(2)} \u00A0\u00A0\u00A0\u00A0</p>
+        <p class="status"> Order status : ${element.status}</p>
       </div>
       `;
       $('#listOfOrders').append(orderTempString);

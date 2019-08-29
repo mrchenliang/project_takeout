@@ -63,7 +63,7 @@ const renderMenuItems = function(data) {
               <tr class='entry${count}'>
                 <td>${name}<i class="window close outline icon closeIcon" data-icon="${count}"></i><p>${notes}</p></td>
                 <td>${qty}</td>
-                <td>$${qty * price / 100}</td>
+                <td>$${(qty * price / 100).toFixed(2)}</td>
               </tr>
             `;
             $('.summBody').append(tempString);
@@ -87,7 +87,7 @@ const renderMenuItems = function(data) {
           $('.cartTotals').empty();
           const tempStringTotals = `
           <div class='cartTotalsSum'>
-            <h2>Your total : $<span id='theTotal'>${(total) / 100}</span></h2>
+            <h2>Your total : $<span id='theTotal'>${(total / 100).toFixed(2)}</span></h2>
           </p>
           `;
           const tempStringButton = `
