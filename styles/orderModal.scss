@@ -1,12 +1,16 @@
 #orderModal {
-  position: fixed;
+  position: 0px;
+  // position: fixed;
+  // margin-top: 50px;
   padding: 2em;
-  margin: auto 0;
+  .header {
+    border: none;
+  }
 }
 
 #orderModal > .image > .modalImage {
   width: 100%;
-  height: 100%;
+  height: 120%;
   background-size: cover;
   background-position: center center;
 }

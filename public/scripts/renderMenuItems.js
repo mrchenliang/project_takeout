@@ -223,7 +223,6 @@ const renderMenuItems = function(data) {
       const orderModal =
         `<div class="ui modal" id="orderModal">
           <div class="header">
-            <h1>Add to Order</h1>
           </div>
           <div class="image content">
             <div class="modalImage" style='background-image: ${image}'></div>
