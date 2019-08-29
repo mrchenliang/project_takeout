@@ -8,7 +8,7 @@
 const express = require("express");
 const router = express.Router();
 const helpers = require("../lib/dbHelpers.js");
-const sendMessage = require('./send_sms');
+const sendMessage = require("./send_sms");
 
 module.exports = db => {
   router.get("/", (req, res) => {});
@@ -30,7 +30,7 @@ module.exports = db => {
             res.send(result);
           }
         } else {
-          res.send({error: 'Error'});
+          res.send({ error: "Error" });
         }
       })
       .catch(e =>
@@ -41,18 +41,42 @@ module.exports = db => {
   });
 
   //registers the user
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     const { name, email, phone, password } = req.body;
     // console.log(name, email, phone, password);
     helpers.registerUser(db, name, email, phone, password).then(result => {
-      res.send(result)
+      res.send(result);
     });
-  })
+  });
 
   //get all orders from the user's history
   router.get("/:user_id/allOrders", (req, res) => {
-    helpers.getUsersAllOrderDetails(db, req.params.user_id)
+    helpers
+      .getUsersAllOrderDetails(db, req.params.user_id)
       .then(result => res.send(result))
+      .catch(e =>
+        setImmediate(() => {
+          throw e;
+        })
+      );
+  });
+
+  //get all orders from the user's history
+  router.get("/:user_id/allOrders/stats", (req, res) => {
+    helpers.getUsersAllOrderCategoryStats(db, req.params.user_id)
+      .then(result => {
+        let resultArr = [result];
+        helpers.getUsersAllOrderMenuItemStats(db, req.params.user_id)
+          .then(result => {
+            resultArr.push(result);
+            res.send(resultArr);
+          })
+          .catch(e =>
+            setImmediate(() => {
+              throw e;
+            })
+          );
+      })
       .catch(e =>
         setImmediate(() => {
           throw e;
@@ -62,7 +86,8 @@ module.exports = db => {
 
   //get specific order details
   router.get("/:user_id/orders/:order_id", (req, res) => {
-    helpers.getOrderDetails(db, req.params.user_id, req.params.order_id)
+    helpers
+      .getOrderDetails(db, req.params.user_id, req.params.order_id)
       .then(result => res.send(result))
       .catch(e =>
         setImmediate(() => {
@@ -148,11 +173,18 @@ module.exports = db => {
   router.put("/:user_id/orders/submit", (req, res) => {
     const user_id = req.params.user_id;
 
-    helpers.submitOrder(db, user_id)
+    helpers
+      .submitOrder(db, user_id)
       .then(submitResult => {
-        helpers.getRestaurantById(db, submitResult.restaurant_id)
+        helpers
+          .getRestaurantById(db, submitResult.restaurant_id)
           .then(result => {
-            sendMessage(`A new order (Order ID: ${submitResult.id}) has come through. Check the queue!`, result.phone);
+            sendMessage(
+              `A new order (Order ID: ${
+                submitResult.id
+              }) has come through. Check the queue!`,
+              result.phone
+            );
             res.send(submitResult);
           })
           .catch(e =>
