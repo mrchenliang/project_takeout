@@ -192,7 +192,7 @@ $(document).ready(function() {
     $("#order-progress").on("click", () => {
       generateAllOrders();
       $('#orderHistoryModal')
-        .modal('show')
+        .modal('show');
       ;
     });
     $("#registerModal").modal("hide");
@@ -205,4 +205,16 @@ $(document).ready(function() {
   $(".exitR").on("click", () => {
     $("#registerModal").modal("hide");
   });
+
+  $('#orderHistoryExit1').on('click', () => {
+    const allCookies = document.cookie;
+    const splitCookie = allCookies.split('=');
+    $.ajax({
+      method : 'GET',
+      url: '/users/' + splitCookie[1][0] + '/allOrders/stats',
+    }).done(function(value) {
+      console.log(value);
+      drawChart(value);
+    });
+  })
 });
