@@ -89,12 +89,16 @@ $(document).ready(function() {
   $(".restaurants-link").on("click", () => {
     $.ajax("/restaurants", { method: "GET" }).done(function(value) {
       renderRestaurantsPage(value);
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     });
   });
 
   // ON CLICK LISTENER AND RENDER RESTAURANTS PAGE
   $("#logo").on("click", () => {
     renderLandingPage("data");
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   });
 
   // INITAL LANDING PAGE FOR CLIENTS
