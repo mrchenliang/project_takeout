@@ -26,13 +26,13 @@
 }
 
 #landingRestaurants {
-  height: 60vh;
+  height: 80vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-
-  padding: 60px 0px;
+  align-items: center;
+  padding: 20px 0px;
 }
 
 .image {
@@ -47,7 +47,7 @@
   justify-content: center;
 }
 
-img {
+.instruction-img {
   position: absolute;
   left: -1000%;
   right: -1000%;
@@ -56,4 +56,14 @@ img {
   margin: auto;
   min-height: 100%;
   min-width: 100%;
+}
+
+#map {
+  height: 60vh;
+  width: 80%;
+  overflow:visible;
+}
+
+#restaurant-button {
+  margin-top: 20px;
 }

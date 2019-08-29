@@ -1,3 +1,72 @@
+// Initialize and add the map
+function initMap() {
+  // The location of lighthouse labs
+  var lhl = {lat: 43.644, lng: -79.402};
+
+  //Define the style for the map (without POIs)
+  var myStyles =[
+    {
+        featureType: "poi",
+        elementType: "labels",
+        stylers: [
+              { visibility: "off" }
+        ]
+    }
+  ];
+
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+    document.getElementById('map'), {
+        zoom: 16,
+        center: lhl,
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: myStyles
+  });
+
+  let geocoder = new google.maps.Geocoder();
+  let infowindow = null;
+
+  if (geocoder) {
+    $.ajax('/restaurants', { method: 'GET' })
+    .done(function(result) {
+      for (restaurant of result){
+        let name = restaurant.name;
+        let address = restaurant.address;
+
+        geocoder.geocode( { 'address': restaurant.address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+              infowindow = new google.maps.InfoWindow({
+                content: address,
+                size: new google.maps.Size(150,50)
+              });
+
+              var marker = new google.maps.Marker({
+                  position: results[0].geometry.location,
+                  map: map,
+                  label: {
+                    color: '#000000',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    text: name
+                  }
+              });
+
+              google.maps.event.addListener(marker, 'click', function() {
+                if (infowindow) {
+                  infowindow.close();
+                }
+                infowindow.open(map,marker);
+              });
+            }
+          }
+        });
+      }
+    });
+  }
+}
+
 $(document).ready(function() {
 
   if (sessionStorage.getItem('restId')) {
