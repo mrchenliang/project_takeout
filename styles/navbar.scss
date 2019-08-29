@@ -1,7 +1,3 @@
-#order-progress {
-  // margin-right: 100px;
-}
-
 #logo {
   font-weight: 700;
   font-family: 'Comfortaa', cursive;
@@ -45,6 +41,19 @@
   top: 0;
   left: 0;
   width: 100%;
+}
+
+#invalidInputMessage {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 93.5vw;
+  margin-left: 6.5vw;
+}
+
+.hidden {
+  display: none;
 }
 
 // .ui.modal:not(.compact) {

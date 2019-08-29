@@ -90,7 +90,10 @@ const renderClientsOrdersPage = function(data) {
         });
       });
     } else {
-      alert("Error: Not Valid Entry!");
+      $('#invalidInputMessage').removeClass("hidden");
+      setTimeout(() => {
+        $('#invalidInputMessage').addClass("hidden");
+      }, 1500);
     }
   });
 
