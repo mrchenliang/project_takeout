@@ -1,5 +1,5 @@
 // Initialize and add the map
-const initMap = function() {
+function initMap() {
   // The location of lighthouse labs
   let lhl = {lat: 43.644, lng: -79.402};
 

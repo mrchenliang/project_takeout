@@ -10,6 +10,8 @@ const sass       = require("node-sass-middleware");
 const cookieParser = require('cookie-parser');
 const app        = express();
 const morgan     = require('morgan');
+const favicon    = require('serve-favicon');
+const path       = require('path');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -20,6 +22,7 @@ const db = new Pool(dbParams);
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
