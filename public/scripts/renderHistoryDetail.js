@@ -2,8 +2,8 @@ const renderHistoryDetail = function(data) {
   $("#clientsRightContainer").empty();
 
   let info =
-`<h1>Customer: ${data[0].user_name}</h1>
-<h1>Order ID: ${data[0].order_id}</h1>`;
+  `<h1>Customer: ${data[0].user_name}</h1>
+  <h1>Order ID: ${data[0].order_id}</h1>`;
 
   let total = 0;
   data.forEach(element => {

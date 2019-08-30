@@ -1,4 +1,5 @@
 const generateAllOrders = function() {
+
   $('#listOfOrders').empty();
 
   const allCookies = document.cookie;
@@ -30,23 +31,22 @@ const generateSingleOrder = function(orderId) {
 
   $('#singleOrderDetails').empty();
 
-
   const tempString = `
   <div id='mainOrderDiv'>
-  <h1 id='mainRestaurantTitle'></h1>
-  <h4 id='orderPlacedAtHist'></h4>
+    <h1 id='mainRestaurantTitle'></h1>
+    <h4 id='orderPlacedAtHist'></h4>
   <table class='ui celled table'>
-  <thead>
-  <tr>
-  <th>Name</th>
-  <th>Qty</th>
-  <th>Price</th>
-  </tr>
-  </thead>
-  <tbody class='summBodyHist'>
-  </tbody>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody class='summBodyHist'>
+    </tbody>
   </table>
-  <h2 id='totalOrderHistPrice'></h2>
+    h2 id='totalOrderHistPrice'></h2>
   </div>`;
   $('#singleOrderDetails').append(tempString);
 

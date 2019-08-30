@@ -1,5 +1,5 @@
 // Initialize and add the map
-function initMap() {
+const initMap = function() {
   // The location of lighthouse labs
   let lhl = {lat: 43.644, lng: -79.402};
 
@@ -187,14 +187,17 @@ $(document).ready(function() {
     });
   });
 
+  //SHOW LOGIN MODAL
   $("#login").on("click", () => {
     $("#loginModal").modal("show");
   });
 
+  //SHOW SIGNUP MODAL
   $("#signup").on("click", () => {
     $("#registerModal").modal("show");
   });
 
+  //LOGIN LOGIC
   $("#mainLoginForm").submit(function() {
     event.preventDefault();
     const formArray = $("#mainLoginForm").serializeArray();
@@ -205,7 +208,6 @@ $(document).ready(function() {
         password: formArray[1].value
       }
     }).done(function(value) {
-      console.log(value);
       if (value.error == "Error") {
         $(".loginHeader").text("Login failed. Please check your credentials.");
       } else {
@@ -227,6 +229,7 @@ $(document).ready(function() {
     });
   });
 
+  //LOGOUT LOGIC
   $("#logout").on("click", () => {
     $("#login").css("display", "inline-block");
     $("#signup").css("display", "inline-block");
@@ -238,6 +241,8 @@ $(document).ready(function() {
     $(".cartTotals").empty();
   });
 
+
+  //REGISTER LOGIC
   $("#mainRegisterForm").submit(function() {
     event.preventDefault();
     const formArray = $("#mainRegisterForm").serializeArray();
@@ -265,7 +270,7 @@ $(document).ready(function() {
       generateAllOrders();
       $('#orderHistoryModal')
         .modal('show');
-      
+
     });
     $("#registerModal").modal("hide");
   });
@@ -278,6 +283,7 @@ $(document).ready(function() {
     $("#registerModal").modal("hide");
   });
 
+    //YUMMI STATS CHART DRAWING
   $('#orderHistoryExit1').click(function() {
     drawChart();
   });
