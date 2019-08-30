@@ -1,48 +1,48 @@
 // Initialize and add the map
 function initMap() {
   // The location of lighthouse labs
-  var lhl = {lat: 43.644, lng: -79.402};
+  let lhl = {lat: 43.644, lng: -79.402};
 
   //Define the style for the map (without POIs)
-  var myStyles =[
+  let myStyles = [
     {
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [
-              { visibility: "off" }
-        ]
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
     }
   ];
 
   // The map, centered at Uluru
-  var map = new google.maps.Map(
+  let map = new google.maps.Map(
     document.getElementById('map'), {
-        zoom: 16,
-        center: lhl,
-        disableDefaultUI: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: myStyles
-  });
+      zoom: 16,
+      center: lhl,
+      disableDefaultUI: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: myStyles
+    });
 
   let geocoder = new google.maps.Geocoder();
   let infowindow = null;
 
   if (geocoder) {
     $.ajax('/restaurants', { method: 'GET' })
-    .done(function(result) {
-      for (restaurant of result){
-        let name = restaurant.name;
-        let address = restaurant.address;
+      .done(function(result) {
+        for (restaurant of result) {
+          let name = restaurant.name;
+          let address = restaurant.address;
 
-        geocoder.geocode( { 'address': restaurant.address}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-              infowindow = new google.maps.InfoWindow({
-                content: address,
-                size: new google.maps.Size(150,50)
-              });
+          geocoder.geocode({ 'address': restaurant.address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                infowindow = new google.maps.InfoWindow({
+                  content: address,
+                  size: new google.maps.Size(150,50)
+                });
 
-              var marker = new google.maps.Marker({
+                let marker = new google.maps.Marker({
                   position: results[0].geometry.location,
                   map: map,
                   label: {
@@ -51,19 +51,19 @@ function initMap() {
                     fontSize: '16px',
                     text: name
                   }
-              });
+                });
 
-              google.maps.event.addListener(marker, 'click', function() {
-                if (infowindow) {
-                  infowindow.close();
-                }
-                infowindow.open(map,marker);
-              });
+                google.maps.event.addListener(marker, 'click', function() {
+                  if (infowindow) {
+                    infowindow.close();
+                  }
+                  infowindow.open(map,marker);
+                });
+              }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      });
   }
 }
 
@@ -78,7 +78,7 @@ $(document).ready(function() {
     }).done(function(value) {
       renderClientsOrdersPage(value);
     });
-  };
+  }
 
   // INITIAL LANDING OF THE INDEX PAGE
   $.ajax("/restaurants", { method: "GET" }).done(function(value) {
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
   // ON CLICK LISTENER AND RENDER ORDERS PAGE
   $(".orders-list").on("click", () => {
-    if (sessionStorage.getItem("restId")!=null) {
+    if (sessionStorage.getItem("restId") != null) {
       $.ajax(`/clients/${sessionStorage.getItem("restId")}/orders`, {
         method: "GET"
       }).done(function(value) {
@@ -119,7 +119,7 @@ $(document).ready(function() {
 
   // ON CLICK LISTENER AND RENDER ORDERS HISTORY PAGE
   $(".orders-history").on("click", () => {
-    if (sessionStorage.getItem("restId")!=null) {
+    if (sessionStorage.getItem("restId") != null) {
       $.ajax(`/clients/${sessionStorage.getItem("restId")}/history`, {
         method: "GET"
       }).done(function(value) {
@@ -265,7 +265,7 @@ $(document).ready(function() {
       generateAllOrders();
       $('#orderHistoryModal')
         .modal('show');
-      ;
+      
     });
     $("#registerModal").modal("hide");
   });

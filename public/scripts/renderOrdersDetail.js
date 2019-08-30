@@ -1,20 +1,20 @@
 const renderOrdersDetail = function(data) {
   $("#clientsRightContainer").empty();
 
-let info =
+  let info =
 `<h1>Customer: ${data[0].user_name}</h1>
 <h1>Order ID: ${data[0].order_id}</h1>`;
 
-let total = 0;
-data.forEach(element => {
-  let orderTotal=element.price * element.quantity / 100;
-  total += orderTotal;
-})
+  let total = 0;
+  data.forEach(element => {
+    let orderTotal = element.price * element.quantity / 100;
+    total += orderTotal;
+  });
 
-let totalMenu =
+  let totalMenu =
 `<h1>Total: $ ${total.toFixed(2)}</h1>`;
 
-let newTemplateString = `
+  let newTemplateString = `
 <table class="ui celled padded table">
 <thead>
   <tr>
@@ -25,8 +25,8 @@ let newTemplateString = `
   <th>Total Price</th>
 </tr></thead>`;
 
-data.forEach(element => {
-  const newItem = `
+  data.forEach(element => {
+    const newItem = `
 
   <tbody>
     <tr>
@@ -46,8 +46,8 @@ data.forEach(element => {
 
     </tr>
   `;
-  newTemplateString += newItem;
-})
+    newTemplateString += newItem;
+  });
 
 
   $("#clientsRightContainer").append(info);

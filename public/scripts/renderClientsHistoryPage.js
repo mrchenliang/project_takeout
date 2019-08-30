@@ -46,7 +46,7 @@ const renderClientsHistoryPage = function(data) {
   $('.refresh-history').on('click', () => {
     $.ajax(`/clients/${sessionStorage.getItem('restId')}/history`, { method: 'GET' })
       .done(function(value) {
-      renderClientsHistoryPage(value);
+        renderClientsHistoryPage(value);
       });
   });
 };

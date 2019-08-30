@@ -33,8 +33,8 @@ const renderMenuItems = function(data) {
       $('.cartDetails').animate({
         scrollTop: ($('#submitOrder').first().offset().top)
       },250);
-    })
-  }
+    });
+  };
 
   const generateCartPopupDetails = function() {
     $(`.summBody`).empty();
@@ -80,7 +80,7 @@ const renderMenuItems = function(data) {
                 data: `menu_item_id=${element.menu_item_id}&notes=${notes}`
               }).done((result) => {
                 generateCartPopupDetails();
-              })
+              });
             });
             total += qty * price;
           });
@@ -240,7 +240,7 @@ const renderMenuItems = function(data) {
               <button class="negative ui button" id="removeQuantity">Remove</button>
               <input type="text" name="quantity" id="quantity" readonly value=${quantity} style="border:none">
               <p>x $${price}</p>
-              <p id=totalPrice>Total: $${quantity*price}</p>
+              <p id=totalPrice>Total: $${quantity * price}</p>
               <input type=text name="menu_item_id" style="display: none" value="${itemId}">
             </div>
             <div class="actions">
@@ -254,7 +254,8 @@ const renderMenuItems = function(data) {
       $("#rootContainer").append(orderModal);
 
       $('#addToOrder').on('click',() => {
-        $('.cartDetails').removeClass('showCart') });
+        $('.cartDetails').removeClass('showCart');
+      });
 
       $('#orderModal #addQuantity').on('click', function() {
         event.preventDefault();
@@ -263,7 +264,7 @@ const renderMenuItems = function(data) {
         quantityElement.prop('readonly',false);
         quantityElement.val(`${quantity}`);
         quantityElement.prop('readonly',true);
-        $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
+        $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity * price).toFixed(2)}`;
       });
 
       $('#orderModal #removeQuantity').on('click', function() {
@@ -274,8 +275,8 @@ const renderMenuItems = function(data) {
           quantityElement.prop('readonly',false);
           quantityElement.val(`${quantity}`);
           quantityElement.prop('readonly',true);
-          $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity*price).toFixed(2)}`;
-        };
+          $(this).siblings('#totalPrice')[0].innerHTML = `Total: $${(quantity * price).toFixed(2)}`;
+        }
       });
 
       $(`#addItemForm-${itemId}`).on('submit', function() {
@@ -293,13 +294,13 @@ const renderMenuItems = function(data) {
             // console.log(value);
           }
           $('.ui.modal').modal('hide');
-        })
+        });
       });
 
       $('#orderModal').modal('show');
 
     } else {
-        $('#warningMessage').css('z-index', '100');
+      $('#warningMessage').css('z-index', '100');
       setTimeout(() => {
         $('#warningMessage').css('z-index', '-100');
       }, 1500);

@@ -23,10 +23,10 @@ const generateAllOrders = function() {
         generateSingleOrder(orderId);
       });
     });
-});
-}
+  });
+};
 
-const generateSingleOrder = function (orderId) {
+const generateSingleOrder = function(orderId) {
 
   $('#singleOrderDetails').empty();
 

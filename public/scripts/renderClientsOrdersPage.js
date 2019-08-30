@@ -9,8 +9,8 @@ const renderClientsOrdersPage = function(data) {
     const newOrder = `
     <div class = "order-card-wrap" id="order-card-wrap" data-orderID='${element.order_id}'>
     <div class="ui raised very padded text container segment status-${
-      element.order_status
-    }" id="order-card-wrap">
+  element.order_status
+}" id="order-card-wrap">
   <h2 class="ui header" >Order ID: ${element.order_id} </h2>
   <div class='orders-usersID'>
   Customer Name: ${element.name}
@@ -28,13 +28,13 @@ const renderClientsOrdersPage = function(data) {
   </div>
   <form class='confirm-completed' data-id='${element.order_id}'>
   ${
-    element.order_status == "submitted"
-      ? `<div class="ui mini icon input">
+  element.order_status == "submitted"
+    ? `<div class="ui mini icon input">
   <input type="text" placeholder="Wait Time" id="waittime-${element.order_id}">
   </div>
   <button class="ui secondary button"> Confirm </button>`
-      : `<button class="ui secondary button"> Pick Up </button>`
-  }
+    : `<button class="ui secondary button"> Picked Up </button>`
+}
 </form>
 </div>
 </div>
