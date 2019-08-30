@@ -38,7 +38,6 @@ const renderClientsHistoryPage = function(data) {
     const queryString = `/clients/${sessionStorage.getItem('restId')}/history/${orderId}`;
 
     $.ajax(queryString, { method: "GET" }).done(function(value) {
-      console.log(value);
       renderHistoryDetail(value);
     });
   });

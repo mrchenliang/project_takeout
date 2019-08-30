@@ -49,7 +49,6 @@ const renderMenuItems = function(data) {
         url: '/users/' + splitCookie[1][0] + '/orders',
       }).done(function(value) {
         if (value.length !== 0) {
-          console.log(value);
           $('.cartDetailsTitle').append(`<h3>${value[0].restaurant_name}</h3>`);
           let total = 0;
           let count = 0;
@@ -72,7 +71,6 @@ const renderMenuItems = function(data) {
               $('.entry' + clickedElement[0].dataset.icon).remove();
 
               const oldVal = $('#theTotal').text();
-              console.log(oldVal);
               $('#theTotal').text((oldVal - ((price * qty) / 100)).toFixed(2));
               $.ajax({
                 method : 'DELETE',
@@ -103,7 +101,6 @@ const renderMenuItems = function(data) {
               method : 'PUT',
               url: '/users/' + splitCookie[1][0] + '/orders/submit',
             }).done((value) => {
-              console.log(value);
             });
           });
         }

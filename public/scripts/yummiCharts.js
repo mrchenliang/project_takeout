@@ -11,7 +11,6 @@ const drawChart = function() {
     let data = new google.visualization.DataTable();
     data.addColumn('string', 'Categories');
     data.addColumn('number', 'Total Cost');
-    console.log(value[0]);
 
 
     value[0].forEach(element => {

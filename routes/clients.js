@@ -71,7 +71,6 @@ module.exports = db => {
         const user_id = result[0].user_id;
         helpers.getUserById(db, user_id).then(result => {
           const phone = result.phone;
-          //console.log(markOrderResult);
           if (markOrderResult.status === "confirmed") {
             sendMessage(
               `Your order has been confirmed and is being prepared. Estimated wait time is ${markOrderResult.wait_time} minutes. Hold tight!`,
@@ -101,13 +100,11 @@ module.exports = db => {
   router.post("/login", (req, res) => {
     const clientId = req.body.clientId;
     const clientPassword = req.body.clientPassword;
-    console.log(clientId);
     helpers
       .getClientByID(db, clientId)
       .then(result => {
         const clientDetails = result;
         if (result) {
-          console.log(result, clientPassword);
           if (clientDetails.password === clientPassword) {
             res.send(result);
           } else {

@@ -40,7 +40,6 @@ module.exports = db => {
   //registers the user
   router.post("/", (req, res) => {
     const { name, email, phone, password } = req.body;
-    // console.log(name, email, phone, password);
     helpers.registerUser(db, name, email, phone, password).then(result => {
       res.send(result);
     });
@@ -118,7 +117,6 @@ module.exports = db => {
     helpers
       .addToOrder(db, user_id, menu_item_id, quantity, notes)
       .then(result => {
-        // console.log(result);
         res.send(result);
       })
       .catch(e =>
@@ -138,7 +136,6 @@ module.exports = db => {
     helpers
       .editOrderItem(db, user_id, menu_item_id, quantity, notes)
       .then(result => {
-        // console.log(result);
         res.send(result);
       })
       .catch(e =>
