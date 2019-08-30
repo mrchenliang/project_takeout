@@ -57,6 +57,7 @@ const generateSingleOrder = function (orderId) {
     method : 'GET',
     url: '/users/' + splitCookie[1][0] + '/orders/' + orderId,
   }).done(function(value) {
+    $('.summBodyHist').empty();
     $('#mainRestaurantTitle').text(value[0].restaurant_name);
     const time = `This order has been placed at: ${value[0].placed_at.slice(11, 16)}, ${value[0].placed_at.slice(0, 10)}`;
     $('#orderPlacedAtHist').text(time);
