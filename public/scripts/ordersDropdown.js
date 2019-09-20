@@ -46,7 +46,7 @@ const generateSingleOrder = function(orderId) {
     <tbody class='summBodyHist'>
     </tbody>
   </table>
-    h2 id='totalOrderHistPrice'></h2>
+    <h2 id='totalOrderHistPrice'></h2>
   </div>`;
   $('#singleOrderDetails').append(tempString);
 
